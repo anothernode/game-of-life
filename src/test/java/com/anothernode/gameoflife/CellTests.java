@@ -1,17 +1,21 @@
 package com.anothernode.gameoflife;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class CellTests {
 
     @Test
     public void cellExists() {
 
-        Coordinates coordinates = new Coordinates(-12, -37);
+        int x = -12;
+        int y = -37;
+
+        Coordinates coordinates = new Coordinates(x, y);
         Cell cell = new Cell(coordinates);
 
-        assertThat(cell.getCoordinates()).isEqualTo(coordinates);
+        assertThat(cell.getCoordinates().getX()).isEqualTo(x);
+        assertThat(cell.getCoordinates().getY()).isEqualTo(y);
     }
 }
