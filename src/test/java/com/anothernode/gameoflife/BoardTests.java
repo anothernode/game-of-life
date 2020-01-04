@@ -16,7 +16,6 @@ public class BoardTests {
         board.add(cell1);
         board.add(cell2);
 
-        assertThat(board.getCells().size()).isEqualTo(2);
+        assertThat(board.size()).isEqualTo(2);
     }
-
 }

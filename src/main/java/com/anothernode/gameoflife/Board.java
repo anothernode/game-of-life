@@ -14,4 +14,8 @@ public class Board {
     public Set<Cell> getCells() {
         return cells;
     }
+
+    public int size() {
+        return cells.size();
+    }
 }
