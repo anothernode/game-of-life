@@ -1,8 +1,5 @@
 package com.anothernode.gameoflife;
 
-/**
- * Coordinates
- */
 public class Coordinates {
 
     private int x;
@@ -20,5 +17,4 @@ public class Coordinates {
     public int getY() {
         return y;
     }
-
 }

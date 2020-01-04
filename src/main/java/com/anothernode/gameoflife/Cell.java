@@ -1,8 +1,5 @@
 package com.anothernode.gameoflife;
 
-/**
- * Cell
- */
 public class Cell {
 
     private Coordinates coordinates;
