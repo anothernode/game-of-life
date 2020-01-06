@@ -11,4 +11,8 @@ public class Cell {
     public Coordinates getCoordinates() {
         return coordinates;
     }
+
+    public int countNeighbors() {
+        return 0;
+    }
 }

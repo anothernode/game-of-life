@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GameTests {
 
     @Test
-    public void singleCellDies() {
+    public void cellWithoutNeigborDies() {
 
         Board board = new Board();
         board.add(new Cell(new Coordinates(0, 0)));
@@ -19,14 +19,29 @@ public class GameTests {
     }
 
     @Test
-    public void twoCellsDie() {
+    public void cellWithJustOneNeighborDies() {
 
         Board board = new Board();
         board.add(new Cell(new Coordinates(0, 0)));
+        board.add(new Cell(new Coordinates(1, 0)));
         Game game = new Game(board);
 
         game.iterate();
 
         assertThat(game.getBoard().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void cellWithTwoNeighborsSurvives() {
+
+        Board board = new Board();
+        board.add(new Cell(new Coordinates(0, 0)));
+        board.add(new Cell(new Coordinates(1, 0)));
+        board.add(new Cell(new Coordinates(0, 1)));
+        Game game = new Game(board);
+
+        game.iterate();
+
+        assertThat(game.getBoard().size()).isEqualTo(3);
     }
 }

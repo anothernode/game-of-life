@@ -18,4 +18,16 @@ public class CellTests {
         assertThat(cell.getCoordinates().getX()).isEqualTo(x);
         assertThat(cell.getCoordinates().getY()).isEqualTo(y);
     }
+
+    @Test
+    public void countNeigborsCountsZeroForNoNeighbor() {
+
+        Cell cell = new Cell(new Coordinates(0, 0));
+        Board board = new Board();
+        board.add(cell);
+
+        int neighborCount = cell.countNeighbors();
+
+        assertThat(neighborCount).isEqualTo(0);
+    }
 }
