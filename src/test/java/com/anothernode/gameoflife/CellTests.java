@@ -22,12 +22,22 @@ public class CellTests {
     @Test
     public void countNeigborsCountsZeroForNoNeighbor() {
 
-        Cell cell = new Cell(new Coordinates(0, 0));
+        Cell cell = new Cell(0, 0);
         Board board = new Board();
         board.add(cell);
 
         int neighborCount = cell.countNeighbors();
 
         assertThat(neighborCount).isEqualTo(0);
+    }
+
+    @Test
+    public void countNeighborsCountsOneForOneNeighbor() {
+
+        Cell cell = new Cell(0, 0);
+        Cell neighbor = new Cell(0, 1);
+        Board board = new Board();
+        board.add(cell);
+        board.add(neighbor);
     }
 }

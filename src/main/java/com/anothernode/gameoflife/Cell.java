@@ -8,6 +8,10 @@ public class Cell {
         this.coordinates = coordinates;
     }
 
+    public Cell(int x, int y) {
+        this.coordinates = new Coordinates(x, y);
+    }
+
     public Coordinates getCoordinates() {
         return coordinates;
     }

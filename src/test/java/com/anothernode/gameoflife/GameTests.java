@@ -10,7 +10,7 @@ public class GameTests {
     public void cellWithoutNeigborDies() {
 
         Board board = new Board();
-        board.add(new Cell(new Coordinates(0, 0)));
+        board.add(new Cell(0, 0));
         Game game = new Game(board);
 
         game.iterate();
@@ -22,8 +22,8 @@ public class GameTests {
     public void cellWithJustOneNeighborDies() {
 
         Board board = new Board();
-        board.add(new Cell(new Coordinates(0, 0)));
-        board.add(new Cell(new Coordinates(1, 0)));
+        board.add(new Cell(0, 0));
+        board.add(new Cell(1, 0));
         Game game = new Game(board);
 
         game.iterate();
@@ -35,9 +35,9 @@ public class GameTests {
     public void cellWithTwoNeighborsSurvives() {
 
         Board board = new Board();
-        board.add(new Cell(new Coordinates(0, 0)));
-        board.add(new Cell(new Coordinates(1, 0)));
-        board.add(new Cell(new Coordinates(0, 1)));
+        board.add(new Cell(0, 0));
+        board.add(new Cell(1, 0));
+        board.add(new Cell(0, 1));
         Game game = new Game(board);
 
         game.iterate();
