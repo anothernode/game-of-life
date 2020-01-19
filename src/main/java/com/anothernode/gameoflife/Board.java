@@ -21,8 +21,8 @@ public class Board {
 
     public int countNeighbors(Cell cell) {
         int count = 0;
-        int x = cell.getCoordinates().getX();
-        int y = cell.getCoordinates().getY();
+        int x = cell.getLocation().getX();
+        int y = cell.getLocation().getY();
 
         if (cells.contains(new Cell(x - 1, y + 1))) {
             count++;

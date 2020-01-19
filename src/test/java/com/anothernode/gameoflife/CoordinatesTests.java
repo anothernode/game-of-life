@@ -12,7 +12,7 @@ public class CoordinatesTests {
     @Test
     public void coordinatesExist() {
 
-        Coordinates coordinates = new Coordinates(-5, 14);
+        Location coordinates = Location.create(-5, 14);
 
         assertThat(coordinates.getX()).isEqualTo(-5);
         assertThat(coordinates.getY()).isEqualTo(14);

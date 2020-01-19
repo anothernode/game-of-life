@@ -13,11 +13,11 @@ public class CellTests {
         int x = -12;
         int y = -37;
 
-        Coordinates coordinates = new Coordinates(x, y);
+        Location coordinates = Location.create(x, y);
         Cell cell = new Cell(coordinates);
 
-        assertThat(cell.getCoordinates().getX()).isEqualTo(x);
-        assertThat(cell.getCoordinates().getY()).isEqualTo(y);
+        assertThat(cell.getLocation().getX()).isEqualTo(x);
+        assertThat(cell.getLocation().getY()).isEqualTo(y);
     }
 
     @Test

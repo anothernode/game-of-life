@@ -2,18 +2,18 @@ package com.anothernode.gameoflife;
 
 public class Cell {
 
-    private Coordinates coordinates;
+    private Location location;
 
-    public Cell(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public Cell(Location location) {
+        this.location = location;
     }
 
     public Cell(int x, int y) {
-        this.coordinates = new Coordinates(x, y);
+        this.location = Location.create(x, y);
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Location getLocation() {
+        return location;
     }
 
     public int neighborCount() {
