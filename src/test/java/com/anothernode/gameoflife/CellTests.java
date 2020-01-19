@@ -26,9 +26,7 @@ public class CellTests {
         Board board = new Board();
         board.add(cell);
 
-        int neighborCount = cell.countNeighbors();
-
-        assertThat(neighborCount).isEqualTo(0);
+        assertThat(cell.neighborCount()).isEqualTo(0);
     }
 
     @Test
@@ -39,5 +37,7 @@ public class CellTests {
         Board board = new Board();
         board.add(cell);
         board.add(neighbor);
+
+        assertThat(cell.neighborCount()).isEqualTo(1);
     }
 }

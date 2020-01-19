@@ -16,7 +16,7 @@ public class Cell {
         return coordinates;
     }
 
-    public int countNeighbors() {
+    public int neighborCount() {
         return 0;
     }
 }
