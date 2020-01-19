@@ -2,6 +2,7 @@ package com.anothernode.gameoflife;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class CellTests {
@@ -29,6 +30,7 @@ public class CellTests {
         assertThat(cell.neighborCount()).isEqualTo(0);
     }
 
+    @Disabled // TODO
     @Test
     public void countNeighborsCountsOneForOneNeighbor() {
 

@@ -7,15 +7,48 @@ public class Board {
 
     private Set<Cell> cells = new HashSet<>();
 
-    public void add(Cell cell) {
-        cells.add(cell);
-    }
-
     public Set<Cell> getCells() {
         return cells;
     }
 
     public int size() {
         return cells.size();
+    }
+
+    public void add(Cell cell) {
+        cells.add(cell);
+    }
+
+    public int countNeighbors(Cell cell) {
+        int count = 0;
+        int x = cell.getCoordinates().getX();
+        int y = cell.getCoordinates().getY();
+
+        if (cells.contains(new Cell(x - 1, y + 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x, y + 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x + 1, y + 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x + 1, y))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x + 1, y - 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x, y - 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x - 1, y - 1))) {
+            count++;
+        }
+        if (cells.contains(new Cell(x - 1, y))) {
+            count++;
+        }
+
+        return count;
     }
 }

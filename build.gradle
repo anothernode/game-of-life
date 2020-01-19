@@ -22,10 +22,14 @@ repositories {
 	mavenCentral()
 }
 
+def autoValueVersion = '1.7'
+
 dependencies {
+	compile "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor "com.google.auto.value:auto-value:${autoValueVersion}"
 	testCompile 'org.assertj:assertj-core:3.11.1'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

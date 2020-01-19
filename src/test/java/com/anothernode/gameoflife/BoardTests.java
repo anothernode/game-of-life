@@ -20,10 +20,24 @@ public class BoardTests {
     }
 
     @Test
-    public void neighborsAreCountedCorrectly() {
+    public void countNeighborsCountsZeroForCellWithoutNeighbor() {
+
+        Cell cell = new Cell(0, 0);
+        Board board = new Board();
+        board.add(cell);
+
+        assertThat(board.countNeighbors(cell)).isEqualTo(0);
+    }
+
+    @Test
+    public void countNeighborsCountsOneForCellWithOneNeighbor() {
 
         Cell cell1 = new Cell(0, 0);
         Cell cell2 = new Cell(0, 1);
+        Board board = new Board();
+        board.add(cell1);
+        board.add(cell2);
 
+        assertThat(board.countNeighbors(cell1)).isEqualTo(1);
     }
 }
