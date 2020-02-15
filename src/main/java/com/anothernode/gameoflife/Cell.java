@@ -19,4 +19,18 @@ public class Cell {
     public int neighborCount() {
         return 0;
     }
+
+    @Override
+    public boolean equals(Object that) {
+        if (!(that instanceof Cell)) {
+            return false;
+        } else {
+            return this.location.equals(((Cell) that).getLocation());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getLocation().hashCode();
+    }
 }
