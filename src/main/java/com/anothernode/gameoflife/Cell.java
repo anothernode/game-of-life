@@ -1,5 +1,7 @@
 package com.anothernode.gameoflife;
 
+import static java.text.MessageFormat.format;
+
 public class Cell {
 
     private Location location;
@@ -32,5 +34,12 @@ public class Cell {
     @Override
     public int hashCode() {
         return this.getLocation().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return format("Cell[x = {0}, y = {1}]",
+                getLocation().getX(),
+                getLocation().getY());
     }
 }

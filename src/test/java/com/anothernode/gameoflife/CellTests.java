@@ -45,6 +45,14 @@ public class CellTests {
     }
 
     @Test
+    public void cellHasCorrectStringRepresentation() {
+
+        Cell cell = new Cell(8,3);
+
+        assertThat(cell.toString()).isEqualTo("Cell[x = 8, y = 3]");
+    }
+
+    @Test
     public void countNeigborsCountsZeroForNoNeighbor() {
 
         Cell cell = new Cell(0, 0);
