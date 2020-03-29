@@ -1,5 +1,5 @@
 plugins {
-  id 'org.springframework.boot' version '2.2.1.RELEASE'
+  id 'org.springframework.boot' version '2.2.6.RELEASE'
   id 'io.spring.dependency-management' version '1.0.8.RELEASE'
   id 'java'
 }
@@ -39,7 +39,7 @@ dependencies {
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   annotationProcessor "com.google.auto.value:auto-value:${autoValueVersion}"
-  testCompile 'org.assertj:assertj-core:3.11.1'
+  testCompile 'org.assertj:assertj-core:3.15.0'
   testImplementation('org.springframework.boot:spring-boot-starter-test') {
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
