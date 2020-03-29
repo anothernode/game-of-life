@@ -19,36 +19,26 @@ public class Board {
         cells.add(cell);
     }
 
+    public boolean hasCell(Location location) {
+        return cells.contains(new Cell(location));
+    }
+
+    public boolean hasCell(int x, int y) {
+        return hasCell(Location.create(x, y));
+    }
+
     public int countNeighbors(Cell cell) {
         int count = 0;
-        int x = cell.getLocation().getX();
-        int y = cell.getLocation().getY();
+        int baseCellX = cell.getLocation().getX();
+        int baseCellY = cell.getLocation().getY();
 
-        if (cells.contains(new Cell(x - 1, y + 1))) {
-            count++;
+        for (int x = baseCellX - 1; x <= baseCellX + 1; x++) {
+            for (int y = baseCellY - 1; y <= baseCellY + 1; y++) {
+                if (this.hasCell(x, y)) {
+                    count++;
+                }
+            }
         }
-        if (cells.contains(new Cell(x, y + 1))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x + 1, y + 1))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x + 1, y))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x + 1, y - 1))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x, y - 1))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x - 1, y - 1))) {
-            count++;
-        }
-        if (cells.contains(new Cell(x - 1, y))) {
-            count++;
-        }
-
-        return count;
+        return count - 1;
     }
 }
