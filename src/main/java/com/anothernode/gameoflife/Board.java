@@ -27,8 +27,7 @@ public class Board {
         if (cells.contains(new Cell(x - 1, y + 1))) {
             count++;
         }
-        Cell goodCell = new Cell(x, y + 1);
-        if (cells.contains(goodCell)) {
+        if (cells.contains(new Cell(x, y + 1))) {
             count++;
         }
         if (cells.contains(new Cell(x + 1, y + 1))) {
