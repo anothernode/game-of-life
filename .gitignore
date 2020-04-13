@@ -16,7 +16,8 @@ src/main/generated
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/*
+!.idea/codeStyles/
 *.iws
 *.iml
 *.ipr
