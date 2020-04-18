@@ -1,13 +1,15 @@
 plugins {
   id 'org.springframework.boot' version '2.2.6.RELEASE'
   id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id 'com.palantir.git-version' version '0.12.3'
   id 'java'
   id 'eclipse'
   id 'idea'
 }
 
+version gitVersion()
+
 group = 'com.anothernode'
-version = '0.1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
