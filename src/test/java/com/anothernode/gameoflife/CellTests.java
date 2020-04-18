@@ -53,7 +53,7 @@ public class CellTests {
     }
 
     @Test
-    public void countNeigborsCountsZeroForNoNeighbor() {
+    public void countNeighborsCountsZeroForNoNeighbor() {
 
         Cell cell = new Cell(0, 0);
         Board board = new Board();

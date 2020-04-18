@@ -36,7 +36,7 @@ public class BoardTests {
         board.add(new Cell(x, y));
 
         assertThat(board.hasCell(Location.create(x, y))).isTrue();
-        assertThat(board.hasCell(x, y));
+        assertThat(board.hasCell(x, y)).isTrue();
     }
 
     @Test
