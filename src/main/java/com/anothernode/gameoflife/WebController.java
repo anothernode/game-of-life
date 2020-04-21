@@ -5,10 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SimpleWebController {
+public class WebController {
 
-  @GetMapping("/")
+  @GetMapping("/foo")
   public @ResponseBody String home() {
     return "foo";
+  }
+
+  @GetMapping("/")
+  public String index() {
+    return "index";
   }
 }

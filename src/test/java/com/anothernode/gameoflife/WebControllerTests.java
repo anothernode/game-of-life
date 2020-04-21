@@ -10,7 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class SimpleWebControllerTests {
+public class WebControllerTests {
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -21,8 +21,16 @@ public class SimpleWebControllerTests {
   @Test
   void serverDeliversResponse() {
 
-    String response = restTemplate.getForObject("http://localhost:" + port + "/", String.class);
+    String response = restTemplate.getForObject("http://localhost:" + port + "/foo", String.class);
 
     assertThat(response).isEqualTo("foo");
+  }
+
+  @Test
+  void serverDeliversHtmlForIndex() {
+
+    String response = restTemplate.getForObject("http://localhost:" + port + "/", String.class);
+
+    assertThat(response).contains("hello");
   }
 }
