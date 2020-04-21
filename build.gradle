@@ -52,7 +52,7 @@ dependencies {
   // Workaround for running tests in VS Code. Can be removed when upstream is fixed.
   // See https://github.com/microsoft/vscode-java-test/issues/971
   // and https://github.com/eclipse/buildship/issues/980
-  testImplementation('org.junit.platform:junit-platform-launcher:1.5.2')
+  testImplementation('org.junit.platform:junit-platform-engine:+')
 }
 
 test {

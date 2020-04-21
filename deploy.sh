@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-host="gibbs"
+host="gibbs.anothernode.com"
 host_dir="game-of-life"
 service="game-of-life"
 
 build_path="build/libs/"
 
-# This is a bit britle of course because it depends on the output of `printVersion` not to change,
+# This is a bit brittle of course because it depends on the output of `printVersion` not to change,
 # But this whole deployment should be scrapped in favor of a custom gradle task at some point
 # anyway.
 version=`./gradlew printVersion | head -n 3 | tail -n 1`
