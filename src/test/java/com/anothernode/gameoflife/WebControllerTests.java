@@ -3,6 +3,8 @@ package com.anothernode.gameoflife;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,18 +21,10 @@ public class WebControllerTests {
   private int port;
 
   @Test
-  void serverDeliversResponse() {
+  void serverDeliversHtmlDocument() throws Exception {
 
-    String response = restTemplate.getForObject("http://localhost:" + port + "/foo", String.class);
+    Document doc = Jsoup.connect("http://localhost:" + port + "/").get();
 
-    assertThat(response).isEqualTo("foo");
-  }
-
-  @Test
-  void serverDeliversHtmlForIndex() {
-
-    String response = restTemplate.getForObject("http://localhost:" + port + "/", String.class);
-
-    assertThat(response).contains("hello");
+    assertThat(doc.documentType().name()).isEqualTo("html");
   }
 }
