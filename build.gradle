@@ -2,6 +2,7 @@ plugins {
   id 'org.springframework.boot' version '2.2.6.RELEASE'
   id 'io.spring.dependency-management' version '1.0.8.RELEASE'
   id 'com.palantir.git-version' version '0.12.3'
+  id 'org.hidetake.ssh' version '2.10.1'
   id 'java'
   id 'eclipse'
   id 'idea'
@@ -59,4 +60,40 @@ dependencies {
 
 test {
   useJUnitPlatform()
+}
+
+// Deployment
+
+def userHome = System.properties['user.home']
+
+remotes {
+  gibbs {
+    host = 'gibbs.anothernode.com'
+    user = 'anode'
+    identity = file("${userHome}/.ssh/id_rsa-gibbs")
+  }
+}
+
+tasks.register("deploy") {
+  dependsOn build
+  group = "Deployment"
+  description = "Deploys to server"
+
+  doLast {
+    def hostDir = "game-of-life"
+    def hostService = "game-of-life"
+
+    def buildPath = "${projectDir}/build/libs/"
+    def jar = "game-of-life-${version}.jar"
+    def jarPath = buildPath + jar
+
+    ssh.run {
+      session(remotes.gibbs) {
+        put from: jarPath, into: hostDir
+        execute "supervisorctl stop ${hostService}"
+        execute "ln -sf ${jar} ${hostDir}/current.jar"
+        execute "supervisorctl start ${hostService}"
+      }
+    }
+  }
 }
