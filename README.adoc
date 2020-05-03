@@ -1,3 +1,5 @@
+image::https://github.com/anothernode/game-of-life/workflows/Gradle%20CI%20Build/badge.svg?event=push[CI status]
+
 = Visual Studio Code
 
 In Visual Studio Code, if tests don't run because of missing class files, try
