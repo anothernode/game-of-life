@@ -1,4 +1,4 @@
-image::https://github.com/anothernode/game-of-life/workflows/Gradle%20CI%20Build/badge.svg?event=push[CI status]
+image::https://github.com/anothernode/game-of-life/workflows/Gradle%20CI%20Build/badge.svg?event=push[link="https://github.com/anothernode/game-of-life/actions?query=workflow%3A%22Gradle+CI+Build%22"]
 
 = Visual Studio Code
 
