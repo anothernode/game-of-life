@@ -9,6 +9,6 @@ public abstract class Location {
         return new AutoValue_Location(x, y);
     }
 
-    abstract public int getX();
-    abstract public int getY();
+    public abstract int getX();
+    public abstract int getY();
 }
