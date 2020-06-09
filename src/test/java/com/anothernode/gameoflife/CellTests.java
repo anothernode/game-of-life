@@ -8,10 +8,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class CellTests {
+class CellTests {
 
     @Test
-    public void cellHasCorrectCoordinates() {
+    void cellHasCorrectCoordinates() {
 
         int x = -12;
         int y = -37;
@@ -24,7 +24,7 @@ public class CellTests {
     }
 
     @Test
-    public void cellsWithEqualLocationsAreEqual() {
+    void cellsWithEqualLocationsAreEqual() {
 
         Cell cell1 = new Cell(3, 5);
         Cell cell2 = new Cell(3, 5);
@@ -33,7 +33,7 @@ public class CellTests {
     }
 
     @Test
-    public void setContainsCellWithEqualLocation() {
+    void setContainsCellWithEqualLocation() {
 
         Cell cell1 = new Cell(7, 3);
         Cell cell2 = new Cell(7, 3);
@@ -45,7 +45,7 @@ public class CellTests {
     }
 
     @Test
-    public void cellHasCorrectStringRepresentation() {
+    void cellHasCorrectStringRepresentation() {
 
         Cell cell = new Cell(8,3);
 
@@ -53,7 +53,7 @@ public class CellTests {
     }
 
     @Test
-    public void countNeighborsCountsZeroForNoNeighbor() {
+    void countNeighborsCountsZeroForNoNeighbor() {
 
         Cell cell = new Cell(0, 0);
         Board board = new Board();
@@ -64,7 +64,7 @@ public class CellTests {
 
     @Disabled // TODO
     @Test
-    public void countNeighborsCountsOneForOneNeighbor() {
+    void countNeighborsCountsOneForOneNeighbor() {
 
         Cell cell = new Cell(0, 0);
         Cell neighbor = new Cell(0, 1);
