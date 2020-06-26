@@ -26,22 +26,17 @@ public class WebControllerTests {
 
   @Test
   void deliversHtmlDocumentAtBaseUri() throws Exception {
-
     Document doc = Jsoup.connect(baseUri).get();
 
     assertThat(doc.documentType().name()).isEqualTo("html");
   }
 
   @Test
-  void deliversBoardAsTableWithAtLeastOneHeaderAndOneCellAtBaseUri() throws Exception {
-
+  void deliversBoardAsDivGridWithAtLeastNineItemsAtBaseUri() throws Exception {
     Document doc = Jsoup.connect(baseUri).get();
-    Element table = doc.getElementById("board");
+    Element grid = doc.getElementById("board");
 
-    assertThat(table).as("element with id='board'").isNotNull();
-    assertThat(table.tagName()).isEqualTo("table");
-    assertThat(table.getElementsByTag("th")).as("table header").isNotEmpty();
-    assertThat(table.getElementsByTag("td")).as("table data").isNotEmpty();
+    assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
+    assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(9);
   }
-
 }
