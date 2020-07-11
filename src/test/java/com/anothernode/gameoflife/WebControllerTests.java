@@ -39,4 +39,14 @@ public class WebControllerTests {
     assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
     assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(9);
   }
+
+
+@Test
+void deliversBoardAsDivGridWithAtLeastThirtySixItemsAtBaseUri() throws Exception {
+  Document doc = Jsoup.connect(baseUri).get();
+  Element grid = doc.getElementById("board");
+
+  assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
+  assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(36);
+}
 }
