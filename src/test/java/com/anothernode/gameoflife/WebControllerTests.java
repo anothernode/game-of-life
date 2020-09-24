@@ -39,4 +39,13 @@ public class WebControllerTests {
     assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
     assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(9);
   }
+
+  @Test
+  void gameIsCreatedWhenPostingToGamesCollection() throws Exception {
+    Document doc = Jsoup.connect(baseUri + "games").post();
+    Element grid = doc.getElementById("board");
+
+    assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
+    assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(9);
+  }
 }
