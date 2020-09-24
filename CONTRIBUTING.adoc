@@ -1,6 +1,16 @@
 == Contribution Guide
 
-Here are some hints and resources for the development of the Game of Life exercise.
+To get started, just clone the repository and start the app:
+
+```sh
+git clone https://github.com/anothernode/game-of-life
+cd game-of-life
+./gradlew bootRun
+```
+
+Then point your browser to http://localhost:8080.
+
+Find more information in the https://github.com/anothernode/game-of-life/wiki[Project Wiki].
 
 === Visual Studio Code
 

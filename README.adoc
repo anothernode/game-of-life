@@ -1,6 +1,6 @@
 image::https://github.com/anothernode/game-of-life/workflows/Gradle%20CI%20Build/badge.svg?event=push[link="https://github.com/anothernode/game-of-life/actions?query=workflow%3A%22Gradle+CI+Build%22"]
 
-== Mission
+== What's the deal?
 
 This project is an exercise in building a
 https://en.wikipedia.org/wiki/Representational_state_transfer[RESTful web service] using
@@ -8,4 +8,5 @@ https://outsidein.dev/outside-in-tdd.html#beyond-traditional-tdd[Outside-In Test
 Development]. Due to a lack of creativity the domain of the web service is the classic
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life[Game of Life].
 
-Check the link:CONTRIBUTING.adoc[Contribution Guide] for development hints and resources.
+Find more information in the link:CONTRIBUTING.adoc[Contribution Guide] and the
+https://github.com/anothernode/game-of-life/wiki[Project Wiki].
