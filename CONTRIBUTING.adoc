@@ -1,0 +1,12 @@
+== Contribution Guide
+
+Here are some hints and resources for the development of the Game of Life exercise.
+
+=== Visual Studio Code
+
+In Visual Studio Code, if tests don't run because of missing class files, try
+forcing a complete compilation with the _Force Java compilation_ command.
+
+=== Resources
+
+* https://assertj.github.io/doc/[AssertJ]
