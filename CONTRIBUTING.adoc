@@ -11,12 +11,3 @@ cd game-of-life
 Then point your browser to http://localhost:8080.
 
 Find more information in the https://github.com/anothernode/game-of-life/wiki[Project Wiki].
-
-=== Visual Studio Code
-
-In Visual Studio Code, if tests don't run because of missing class files, try
-forcing a complete compilation with the _Force Java compilation_ command.
-
-=== Resources
-
-* https://assertj.github.io/doc/[AssertJ]
