@@ -6,6 +6,8 @@ public class Game {
 
     private Board board;
 
+    public Game() {}
+
     public Game(Board board) {
         this.board = board;
     }

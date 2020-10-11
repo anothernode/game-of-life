@@ -6,6 +6,8 @@ public class Cell {
 
     private Location location;
 
+    public Cell() {}
+
     public Cell(Location location) {
         this.location = location;
     }
