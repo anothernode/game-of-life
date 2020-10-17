@@ -14,7 +14,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class WebControllerTests {
+class WebControllerTests {
 
   @LocalServerPort
   private int port;
@@ -23,10 +23,12 @@ public class WebControllerTests {
   private TestRestTemplate restTemplate;
 
   private String baseUri;
+  private String gamesUri;
 
   @BeforeEach
   void setUp() {
     baseUri = "http://localhost:" + port;
+    gamesUri = baseUri + "/games";
   }
 
   @Test
@@ -47,7 +49,7 @@ public class WebControllerTests {
 
   @Test
   void gameIsCreatedWhenPostingToGamesCollection() throws Exception {
-    Document doc = Jsoup.connect(baseUri + "/games").post();
+    Document doc = Jsoup.connect(gamesUri).post();
     Element grid = doc.getElementById("board");
 
     assertThat(grid.tagName()).as("element with id='gridBoard'").isEqualTo("div");
@@ -56,7 +58,7 @@ public class WebControllerTests {
 
   @Test
   void postingGameWithoutCellsCreatesGameWithoutCells() throws Exception {
-    Game game = restTemplate.postForObject(baseUri + "/games", new Game(Set.of()), Game.class);
+    Game game = restTemplate.postForObject(gamesUri, new Game(Set.of()), Game.class);
 
     assertThat(game.cells()).isEmpty();
   }
@@ -64,8 +66,32 @@ public class WebControllerTests {
   @Test
   void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
     Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    Game game = restTemplate.postForObject(baseUri + "/games", new Game(cells), Game.class);
+    Game game = restTemplate.postForObject(gamesUri, new Game(cells), Game.class);
 
     assertThat(game.cells()).containsAll(cells);
+  }
+
+  @Test
+  void postingGameCreatesGameWithId() throws Exception {
+    Game game = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+
+    assertThat(game.getId()).isNotEmpty();
+  }
+
+  @Test
+  void postedGameCanBeRetrievedWithGetById() throws Exception {
+    var gameReturnedFromPost = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+    var gameReturnedFromGet =
+        restTemplate.getForObject(gamesUri + "/" + gameReturnedFromPost.getId(), Game.class);
+
+    assertThat(gameReturnedFromPost.getId()).isEqualTo(gameReturnedFromGet.getId());
+  }
+
+  @Test
+  void twoDistinctGamesHaveDifferentIds() throws Exception {
+    var game1 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+    var game2 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+
+    assertThat(game1.getId()).isNotEqualTo(game2.getId());
   }
 }

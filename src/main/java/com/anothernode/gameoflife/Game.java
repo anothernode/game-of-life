@@ -1,10 +1,11 @@
 package com.anothernode.gameoflife;
 
 import java.util.Set;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class Game {
 
-  private Board board;
+  private Board board = new Board();
 
   public Game() {
   }
@@ -20,7 +21,6 @@ public class Game {
    * @param cells the living {@link Cell}s before the first iteration
    */
   public Game(Set<Cell> cells) {
-    this.board = new Board();
     cells.forEach((cell -> board.add(cell)));
   }
 
@@ -28,12 +28,16 @@ public class Game {
     return board;
   }
 
+  public String getId() {
+    return RandomStringUtils.random(10);
+  }
+
   public Set<Cell> cells() {
     return board.getCells();
   }
 
   /**
-   * Just a stub
+   * TODO
    */
   public void iterate() {
     board.getCells().clear();
