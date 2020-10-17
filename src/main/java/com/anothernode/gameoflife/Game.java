@@ -5,6 +5,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class Game {
 
+  private String id = RandomStringUtils.random(10);
+
   private Board board = new Board();
 
   public Game() {
@@ -29,7 +31,7 @@ public class Game {
   }
 
   public String getId() {
-    return RandomStringUtils.random(10);
+    return id;
   }
 
   public Set<Cell> cells() {
