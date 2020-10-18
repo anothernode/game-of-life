@@ -1,5 +1,6 @@
 package com.anothernode.gameoflife;
 
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,8 @@ public class WebController {
   }
 
   @PostMapping(value = "/games", produces = MediaType.APPLICATION_JSON_VALUE)
-  public @ResponseBody Game createGameJson(@RequestBody Game game) {
+  public @ResponseBody Game createGameJson(@RequestBody Set<Cell> cells) {
+    var game = new Game(cells);
     gameRepository.save(game);
     return game;
   }

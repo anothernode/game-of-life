@@ -66,7 +66,7 @@ class WebControllerTests {
   @Test
   void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
     Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    Game game = restTemplate.postForObject(gamesUri, new Game(cells), Game.class);
+    Game game = restTemplate.postForObject(gamesUri, cells, Game.class);
 
     assertThat(game.cells()).containsAll(cells);
   }
