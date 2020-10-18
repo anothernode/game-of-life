@@ -80,7 +80,7 @@ class WebControllerTests {
 
   @Test
   void postedGameCanBeRetrievedWithGetById() throws Exception {
-    var gameReturnedFromPost = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+    var gameReturnedFromPost = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
     var gameReturnedFromGet =
         restTemplate.getForObject(gamesUri + "/" + gameReturnedFromPost.getId(), Game.class);
 
