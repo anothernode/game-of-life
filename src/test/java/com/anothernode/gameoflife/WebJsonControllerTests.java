@@ -53,8 +53,8 @@ class WebJsonControllerTests {
   @Test
   void postedGameCanBeRetrievedWithGetById() throws Exception {
     var gameReturnedFromPost = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
-    var gameReturnedFromGet =
-        restTemplate.getForObject(gamesUri + "/" + gameReturnedFromPost.getId(), Game.class);
+    var uri = String.format("%s/%s", gamesUri, gameReturnedFromPost.getId());
+    var gameReturnedFromGet = restTemplate.getForObject(uri, Game.class);
 
     assertThat(gameReturnedFromPost.getId()).isEqualTo(gameReturnedFromGet.getId());
   }
