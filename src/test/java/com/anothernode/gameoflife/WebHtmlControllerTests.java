@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource("classpath:test.properties")
-public class WebControllerHtmlTests {
+public class WebHtmlControllerTests {
 
   @LocalServerPort
   private int port;

@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource("classpath:test.properties")
-class WebControllerJsonTests {
+class WebJsonControllerTests {
 
   @LocalServerPort
   private int port;
@@ -36,6 +36,8 @@ class WebControllerJsonTests {
   void postingGameWithoutCellsCreatesGameWithoutCells() throws Exception {
     var responseEntity = restTemplate.postForEntity(gamesUri, Set.of(), Game.class);
 
+    // Even if the server returns an HTTP error, the RestTemplate will still create a Game
+    // instance with zero cells, so the HTTP return code is verified explicitly here.
     assertThat(responseEntity.getStatusCode().is2xxSuccessful()).isTrue();
     assertThat(responseEntity.getBody().cells()).isEmpty();
   }
@@ -43,7 +45,7 @@ class WebControllerJsonTests {
   @Test
   void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
     Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    Game game = restTemplate.postForObject(gamesUri, cells, Game.class);
+    var game = restTemplate.postForObject(gamesUri, cells, Game.class);
 
     assertThat(game.cells()).isEqualTo(cells);
   }
