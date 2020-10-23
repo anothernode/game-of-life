@@ -43,6 +43,7 @@ def apacheCommonsLangVersion = '3.11'
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
   implementation "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
   implementation "org.apache.commons:commons-lang3:${apacheCommonsLangVersion}"
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
