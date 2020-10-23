@@ -31,6 +31,8 @@ class WebControllerTests {
     gamesUri = baseUri + "/games";
   }
 
+  // HTML based tests
+
   @Test
   void deliversHtmlDocumentAtBaseUri() throws Exception {
     Document doc = Jsoup.connect(baseUri).get();
@@ -56,11 +58,14 @@ class WebControllerTests {
     assertThat(grid.children()).hasSizeGreaterThanOrEqualTo(9);
   }
 
+  // JSON based tests
+
   @Test
   void postingGameWithoutCellsCreatesGameWithoutCells() throws Exception {
-    Game game = restTemplate.postForObject(gamesUri, new Game(Set.of()), Game.class);
+    var responseEntity = restTemplate.postForEntity(gamesUri, Set.of(), Game.class);
 
-    assertThat(game.cells()).isEmpty();
+    assertThat(responseEntity.getStatusCode().is2xxSuccessful()).isTrue();
+    assertThat(responseEntity.getBody().cells()).isEmpty();
   }
 
   @Test
@@ -68,14 +73,7 @@ class WebControllerTests {
     Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     Game game = restTemplate.postForObject(gamesUri, cells, Game.class);
 
-    assertThat(game.cells()).containsAll(cells);
-  }
-
-  @Test
-  void postingGameCreatesGameWithId() throws Exception {
-    Game game = restTemplate.postForObject(gamesUri, new Game(), Game.class);
-
-    assertThat(game.getId()).isNotEmpty();
+    assertThat(game.cells()).isEqualTo(cells);
   }
 
   @Test
