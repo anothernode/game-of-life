@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class Game {
 
-  private String id = RandomStringUtils.random(10);
+  private String id = RandomStringUtils.randomAlphanumeric(10);
 
   private Board board = new Board();
 

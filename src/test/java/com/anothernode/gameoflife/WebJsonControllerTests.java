@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +26,30 @@ class WebJsonControllerTests {
   @Value("${baseUri}")
   private String baseUri;
 
+  private String baseWithPortUri;
   private String gamesUri;
 
   @BeforeEach
   void setUp() {
-    gamesUri = String.format("%s:%s/games", baseUri, port);
+    baseWithPortUri = String.format("%s:%s", baseUri, port);
+    gamesUri = String.format("%s/games", baseWithPortUri);
+  }
+
+  @Test
+  void postedGameCanBeRetrievedWithGetById() throws Exception {
+    var gameReturnedFromPost = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
+    var uri = String.format("%s/%s", gamesUri, gameReturnedFromPost.getId());
+    var gameReturnedFromGet = restTemplate.getForObject(uri, Game.class);
+
+    assertThat(gameReturnedFromPost.getId()).isEqualTo(gameReturnedFromGet.getId());
+  }
+
+  @Test
+  void twoDistinctGamesHaveDifferentIds() throws Exception {
+    var game1 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+    var game2 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
+
+    assertThat(game1.getId()).isNotEqualTo(game2.getId());
   }
 
   @Test
@@ -51,19 +71,12 @@ class WebJsonControllerTests {
   }
 
   @Test
-  void postedGameCanBeRetrievedWithGetById() throws Exception {
-    var gameReturnedFromPost = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
-    var uri = String.format("%s/%s", gamesUri, gameReturnedFromPost.getId());
-    var gameReturnedFromGet = restTemplate.getForObject(uri, Game.class);
+  void postingRoundToGameWithZeroCellsYieldsNextRoundWithZeroCellsOnBoard() throws Exception {
+    var game = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
+    var roundsUri = String.format("%s/%s/rounds", gamesUri, game.getId());
+    var resultEntity = restTemplate.postForEntity(roundsUri, null, Game.class);
 
-    assertThat(gameReturnedFromPost.getId()).isEqualTo(gameReturnedFromGet.getId());
-  }
-
-  @Test
-  void twoDistinctGamesHaveDifferentIds() throws Exception {
-    var game1 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
-    var game2 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
-
-    assertThat(game1.getId()).isNotEqualTo(game2.getId());
+    assertThat(resultEntity.getStatusCode().is2xxSuccessful()).as("HTTP status code is 2xx")
+        .isTrue();
   }
 }
