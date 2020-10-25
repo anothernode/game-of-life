@@ -1,7 +1,6 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 
 public class BoardTests {

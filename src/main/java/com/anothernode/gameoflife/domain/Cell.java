@@ -1,4 +1,4 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import static java.text.MessageFormat.format;
 

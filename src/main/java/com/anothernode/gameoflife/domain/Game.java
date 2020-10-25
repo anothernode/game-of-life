@@ -1,4 +1,4 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;

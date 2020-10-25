@@ -3,8 +3,9 @@ package com.anothernode.gameoflife;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import java.util.Set;
+import com.anothernode.gameoflife.domain.Cell;
+import com.anothernode.gameoflife.domain.Game;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,9 +14,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 
+/**
+ * End to end tests for the RESTful API with loading of the full Spring context
+ */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource("classpath:test.properties")
-class WebJsonControllerTests {
+class RestApiControllerTests {
 
   @LocalServerPort
   private int port;

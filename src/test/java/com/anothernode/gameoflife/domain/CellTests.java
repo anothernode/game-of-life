@@ -1,10 +1,8 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +14,8 @@ class CellTests {
         int x = -12;
         int y = -37;
 
-        Location coordinates = Location.create(x, y);
-        Cell cell = new Cell(coordinates);
+        Location location = Location.create(x, y);
+        Cell cell = new Cell(location);
 
         assertThat(cell.getLocation().getX()).isEqualTo(x);
         assertThat(cell.getLocation().getY()).isEqualTo(y);

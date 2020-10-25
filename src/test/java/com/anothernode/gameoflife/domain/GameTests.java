@@ -1,9 +1,7 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Set;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +9,7 @@ public class GameTests {
 
     @Test
     public void gameWithStartConfigurationIsCreatedCorrectly() {
-        Set<Cell> cells = Set.of(new Cell(0, 0), new Cell (2, 2));
+        Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
         Game game = new Game(cells);
 
         assertThat(game.cells().size()).isEqualTo(2);

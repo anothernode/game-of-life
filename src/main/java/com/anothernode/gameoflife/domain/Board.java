@@ -1,4 +1,4 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import java.util.HashSet;
 import java.util.Set;
