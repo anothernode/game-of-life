@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import java.util.Set;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,8 +41,8 @@ class RestApiControllerTests {
     var emptySetJson = new ObjectMapper().writeValueAsString(Set.of());
     mockMvc.perform(post("/games").content(emptySetJson))
         .andDo(print())
-        .andExpect(status().isOk());
-
-        // Flesh out actual test
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").exists())
+        .andExpect(jsonPath("$.board.cells").isEmpty());
   }
 }
