@@ -2,11 +2,12 @@ package com.anothernode.gameoflife;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import java.util.Set;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,15 +27,20 @@ class RestApiControllerTests {
 
   @BeforeEach
   void setUp(WebApplicationContext wac) {
-    mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-        .defaultRequest(get("/").accept(MediaType.APPLICATION_JSON)) //
+    mockMvc = MockMvcBuilders.webAppContextSetup(wac) //
+        .defaultRequest(get("/") //
+            .accept(MediaType.APPLICATION_JSON) //
+            .contentType(MediaType.APPLICATION_JSON)) //
         .alwaysExpect(status().isOk()) //
-        .alwaysExpect(content().contentType("application/json;charset=UTF-8")) //
+        .alwaysExpect(content().contentType("application/json")) //
         .build();
   }
 
   @Test
   void twoDistinctGamesHaveDifferentIds() throws Exception {
-    mockMvc.perform(post("/games")).andDo(print()).andExpect(status().isOk());
+    var om = new ObjectMapper();
+    mockMvc.perform(post("/games").content(om.writeValueAsString(Set.of()))) //
+        .andDo(print()) //
+        .andExpect(status().isOk());
   }
 }
