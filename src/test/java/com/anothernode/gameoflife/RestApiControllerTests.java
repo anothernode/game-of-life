@@ -27,20 +27,21 @@ class RestApiControllerTests {
 
   @BeforeEach
   void setUp(WebApplicationContext wac) {
-    mockMvc = MockMvcBuilders.webAppContextSetup(wac) //
-        .defaultRequest(get("/") //
-            .accept(MediaType.APPLICATION_JSON) //
-            .contentType(MediaType.APPLICATION_JSON)) //
-        .alwaysExpect(status().isOk()) //
-        .alwaysExpect(content().contentType("application/json")) //
+    mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+        .defaultRequest(get("/")
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON))
+        .alwaysExpect(status().isOk()).alwaysExpect(content().contentType("application/json"))
         .build();
   }
 
   @Test
   void twoDistinctGamesHaveDifferentIds() throws Exception {
-    var om = new ObjectMapper();
-    mockMvc.perform(post("/games").content(om.writeValueAsString(Set.of()))) //
-        .andDo(print()) //
+    var emptySetJson = new ObjectMapper().writeValueAsString(Set.of());
+    mockMvc.perform(post("/games").content(emptySetJson))
+        .andDo(print())
         .andExpect(status().isOk());
+
+        // Flesh out actual test
   }
 }

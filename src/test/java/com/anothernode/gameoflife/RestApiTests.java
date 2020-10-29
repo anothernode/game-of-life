@@ -80,7 +80,8 @@ class RestApiTests {
     var roundsUri = String.format("%s/%s/rounds", gamesUri, game.getId());
     var resultEntity = restTemplate.postForEntity(roundsUri, null, Game.class);
 
-    assertThat(resultEntity.getStatusCode().is2xxSuccessful()).as("HTTP status code is 2xx")
+    assertThat(resultEntity.getStatusCode().is2xxSuccessful())
+        .as("HTTP status code is 2xx")
         .isTrue();
   }
 }
