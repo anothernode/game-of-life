@@ -37,7 +37,7 @@ class RestApiControllerTests {
   }
 
   @Test
-  void twoDistinctGamesHaveDifferentIds() throws Exception {
+  void postingGameWithoutCellsYieldsGameWithoutCells() throws Exception {
     var emptySetJson = new ObjectMapper().writeValueAsString(Set.of());
     mockMvc.perform(post("/games").content(emptySetJson))
         .andDo(print())

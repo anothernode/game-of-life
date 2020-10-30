@@ -57,16 +57,6 @@ class RestApiTests {
   }
 
   @Test
-  void postingGameWithoutCellsCreatesGameWithoutCells() throws Exception {
-    var responseEntity = restTemplate.postForEntity(gamesUri, Set.of(), Game.class);
-
-    // Even if the server returns an HTTP error, the RestTemplate will still create a Game
-    // instance with zero cells, so the HTTP return code is verified explicitly here.
-    assertThat(responseEntity.getStatusCode().is2xxSuccessful()).isTrue();
-    assertThat(responseEntity.getBody().cells()).isEmpty();
-  }
-
-  @Test
   void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
     Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     var game = restTemplate.postForObject(gamesUri, cells, Game.class);
