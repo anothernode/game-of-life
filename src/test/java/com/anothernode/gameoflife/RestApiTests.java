@@ -30,8 +30,8 @@ class RestApiTests {
   @Value("${baseUri}")
   private String baseUri;
 
-  private String baseWithPortUri;
-  private String gamesUri;
+  private static String baseWithPortUri;
+  private static String gamesUri;
 
   @BeforeEach
   void setUp() {
@@ -46,14 +46,6 @@ class RestApiTests {
     var gameReturnedFromGet = restTemplate.getForObject(uri, Game.class);
 
     assertThat(gameReturnedFromPost.getId()).isEqualTo(gameReturnedFromGet.getId());
-  }
-
-  @Test
-  void twoDistinctGamesHaveDifferentIds() throws Exception {
-    var game1 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
-    var game2 = restTemplate.postForObject(gamesUri, new Game(), Game.class);
-
-    assertThat(game1.getId()).isNotEqualTo(game2.getId());
   }
 
   @Test
