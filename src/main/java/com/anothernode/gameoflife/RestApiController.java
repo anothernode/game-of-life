@@ -19,19 +19,19 @@ public class RestApiController {
   @Autowired
   private GameRepository gameRepository;
 
-  @PostMapping(value = "/games")
+  @PostMapping("/games")
   public Game createGameJson(@RequestBody Set<Cell> cells) {
     var game = new Game(cells);
     gameRepository.save(game);
     return game;
   }
 
-  @GetMapping(value = "/games/{id}")
+  @GetMapping("/games/{id}")
   public Game getGameJson(@PathVariable String id) {
     return gameRepository.findById(id);
   }
 
-  @PostMapping(value = "/games/{id}/rounds")
+  @PostMapping("/games/{id}/rounds")
   public Game nextRound(@PathVariable String id) {
     return null;
   }
