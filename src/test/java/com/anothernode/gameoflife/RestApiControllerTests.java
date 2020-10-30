@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Set;
+import com.anothernode.gameoflife.domain.Cell;
 import com.anothernode.gameoflife.domain.Game;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -60,6 +61,14 @@ class RestApiControllerTests {
   }
 
   @Test
+  void postingGameWitCellsCreatesGameWithThoseCells() throws Exception {
+    var cells = objectMapper.writeValueAsString(Set.of(new Cell(0, 0), new Cell(2, 2)));
+    mockMvc.perform(post("/games").content(cells))
+        .andDo(print());
+        // TODO: compare the JSON to something from a resource file
+  }
+
+  @Test
   void gameCanBeRetrievedById() throws Exception {
     var id = "xyz";
     when(gameRepository.findById(id)).thenReturn(new Game());
@@ -81,5 +90,4 @@ class RestApiControllerTests {
 
     assertThat(game1.getId()).isNotEqualTo(game2.getId());
   }
-
 }
