@@ -62,10 +62,13 @@ class RestApiControllerTests {
 
   @Test
   void postingGameWitCellsCreatesGameWithThoseCells() throws Exception {
-    var cells = objectMapper.writeValueAsString(Set.of(new Cell(0, 0), new Cell(2, 2)));
-    mockMvc.perform(post("/games").content(cells))
-        .andDo(print());
-        // TODO: compare the JSON to something from a resource file
+    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
+    var cellsJson = objectMapper.writeValueAsString(cells);
+    var responseJson = mockMvc.perform(post("/games").content(cellsJson))
+        .andReturn().getResponse().getContentAsString();
+    var game = objectMapper.readValue(responseJson, Game.class);
+
+    assertThat(game.getBoard().getCells()).containsAll(cells);
   }
 
   @Test
@@ -79,14 +82,14 @@ class RestApiControllerTests {
   @Test
   void twoDistinctGamesHaveDifferntIds() throws Exception {
     var game1 = objectMapper.readValue(
-      mockMvc.perform(post("/games").content(emptySetJson))
-          .andReturn().getResponse().getContentAsString(),
-      Game.class);
+        mockMvc.perform(post("/games").content(emptySetJson))
+            .andReturn().getResponse().getContentAsString(),
+        Game.class);
 
     var game2 = objectMapper.readValue(
-      mockMvc.perform(post("/games").content(emptySetJson))
-          .andReturn().getResponse().getContentAsString(),
-      Game.class);
+        mockMvc.perform(post("/games").content(emptySetJson))
+            .andReturn().getResponse().getContentAsString(),
+        Game.class);
 
     assertThat(game1.getId()).isNotEqualTo(game2.getId());
   }

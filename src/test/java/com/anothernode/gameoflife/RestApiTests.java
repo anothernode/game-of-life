@@ -49,14 +49,6 @@ class RestApiTests {
   }
 
   @Test
-  void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
-    Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    var game = restTemplate.postForObject(gamesUri, cells, Game.class);
-
-    assertThat(game.cells()).isEqualTo(cells);
-  }
-
-  @Test
   void postingRoundToGameWithZeroCellsYieldsNextRoundWithZeroCellsOnBoard() throws Exception {
     var game = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
     var roundsUri = String.format("%s/%s/rounds", gamesUri, game.getId());
