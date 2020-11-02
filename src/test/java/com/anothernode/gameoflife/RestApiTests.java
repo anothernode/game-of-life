@@ -3,7 +3,6 @@ package com.anothernode.gameoflife;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import java.util.Set;
-import com.anothernode.gameoflife.domain.Cell;
 import com.anothernode.gameoflife.domain.Game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

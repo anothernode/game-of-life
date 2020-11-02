@@ -1,11 +1,12 @@
 package com.anothernode.gameoflife.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Board {
 
-    private Set<Cell> cells = new HashSet<>();
+    private SortedSet<Cell> cells = new TreeSet<>();
 
     public Set<Cell> getCells() {
         return cells;

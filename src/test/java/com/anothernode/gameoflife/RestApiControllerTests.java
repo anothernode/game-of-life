@@ -1,6 +1,7 @@
 package com.anothernode.gameoflife;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -69,6 +70,17 @@ class RestApiControllerTests {
     var game = objectMapper.readValue(responseJson, Game.class);
 
     assertThat(game.getBoard().getCells()).containsAll(cells);
+  }
+
+  @Test
+  void postingGameWitCellsCreatesGameWithThoseCells2() throws Exception {
+    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
+    var cellsJson = objectMapper.writeValueAsString(cells);
+    mockMvc.perform(post("/games").content(cellsJson))
+        .andExpect(jsonPath("$.board.cells[0].location.x", is(0)))
+        .andExpect(jsonPath("$.board.cells[0].location.y", is(0)))
+        .andExpect(jsonPath("$.board.cells[1].location.x", is(2)))
+        .andExpect(jsonPath("$.board.cells[1].location.y", is(2)));
   }
 
   @Test

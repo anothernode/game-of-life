@@ -10,12 +10,11 @@ class CellTests {
 
     @Test
     void cellHasCorrectCoordinates() {
+        var x = -12;
+        var y = -37;
 
-        int x = -12;
-        int y = -37;
-
-        Location location = Location.create(x, y);
-        Cell cell = new Cell(location);
+        var location = Location.create(x, y);
+        var cell = new Cell(location);
 
         assertThat(cell.getLocation().getX()).isEqualTo(x);
         assertThat(cell.getLocation().getY()).isEqualTo(y);
@@ -23,38 +22,47 @@ class CellTests {
 
     @Test
     void cellsWithEqualLocationsAreEqual() {
-
-        Cell cell1 = new Cell(3, 5);
-        Cell cell2 = new Cell(3, 5);
+        var cell1 = new Cell(3, 5);
+        var cell2 = new Cell(3, 5);
 
         assertThat(cell1).isEqualTo(cell2);
     }
 
     @Test
     void setContainsCellWithEqualLocation() {
+        var cell1 = new Cell(7, 3);
+        var cell2 = new Cell(7, 3);
 
-        Cell cell1 = new Cell(7, 3);
-        Cell cell2 = new Cell(7, 3);
-
-        Set<Cell> cells = new HashSet<>();
+        var cells = new HashSet<Cell>();
         cells.add(cell1);
 
         assertThat(cells).contains(cell2);
     }
 
     @Test
-    void cellHasCorrectStringRepresentation() {
+    void cellsCanBeCompared() {
+        var cell1 = new Cell(0, 0);
+        var cell2 = new Cell(5, 3);
+        var cell3 = new Cell(8, 3);
+        var cell4 = new Cell(3, 8);
+        var cell5 = new Cell(3, 8);
 
-        Cell cell = new Cell(8,3);
+        assertThat(cell2).isStrictlyBetween(cell1, cell3);
+        assertThat(cell3).isStrictlyBetween(cell2, cell4);
+        assertThat(cell4).isEqualByComparingTo(cell5);
+    }
+
+    @Test
+    void cellHasCorrectStringRepresentation() {
+        var cell = new Cell(8,3);
 
         assertThat(cell.toString()).isEqualTo("Cell[x = 8, y = 3]");
     }
 
     @Test
     void countNeighborsCountsZeroForNoNeighbor() {
-
-        Cell cell = new Cell(0, 0);
-        Board board = new Board();
+        var cell = new Cell(0, 0);
+        var board = new Board();
         board.add(cell);
 
         assertThat(cell.neighborCount()).isEqualTo(0);
@@ -63,10 +71,9 @@ class CellTests {
     @Disabled // TODO
     @Test
     void countNeighborsCountsOneForOneNeighbor() {
-
-        Cell cell = new Cell(0, 0);
-        Cell neighbor = new Cell(0, 1);
-        Board board = new Board();
+        var cell = new Cell(0, 0);
+        var neighbor = new Cell(0, 1);
+        var board = new Board();
         board.add(cell);
         board.add(neighbor);
 
