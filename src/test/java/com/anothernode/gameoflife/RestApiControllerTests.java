@@ -92,7 +92,7 @@ class RestApiControllerTests {
   }
 
   @Test
-  void twoDistinctGamesHaveDifferntIds() throws Exception {
+  void twoDistinctGamesHaveDifferentIds() throws Exception {
     var game1 = objectMapper.readValue(
         mockMvc.perform(post("/games").content(emptySetJson))
             .andReturn().getResponse().getContentAsString(),

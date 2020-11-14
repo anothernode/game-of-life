@@ -2,7 +2,6 @@ package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +55,7 @@ class CellTests {
     void cellHasCorrectStringRepresentation() {
         var cell = new Cell(8,3);
 
-        assertThat(cell.toString()).isEqualTo("Cell[x = 8, y = 3]");
+        assertThat(cell).hasToString("Cell[x = 8, y = 3]");
     }
 
     @Test
@@ -65,10 +64,10 @@ class CellTests {
         var board = new Board();
         board.add(cell);
 
-        assertThat(cell.neighborCount()).isEqualTo(0);
+        assertThat(cell.neighborCount()).isZero();
     }
 
-    @Disabled // TODO
+    @Disabled("Todo")
     @Test
     void countNeighborsCountsOneForOneNeighbor() {
         var cell = new Cell(0, 0);
