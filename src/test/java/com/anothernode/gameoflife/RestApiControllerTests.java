@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Set;
@@ -47,48 +48,18 @@ class RestApiControllerTests {
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("utf-8"))
         .alwaysExpect(status().isOk())
-        // .alwaysExpect(content().contentType("application/json"))
+        .alwaysExpect(content().contentType("application/json"))
         .build();
 
     emptySetJson = objectMapper.writeValueAsString(Set.of());
   }
 
   @Test
-  void postingGameWithoutCellsYieldsGameWithoutCells() throws Exception {
-    mockMvc.perform(post("/games").content(emptySetJson))
-        .andDo(print())
-        .andExpect(jsonPath("$.id").exists())
-        .andExpect(jsonPath("$.board.cells").isEmpty());
-  }
-
-  @Test
-  void postingGameWitCellsCreatesGameWithThoseCells() throws Exception {
-    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    var cellsJson = objectMapper.writeValueAsString(cells);
-    var responseJson = mockMvc.perform(post("/games").content(cellsJson))
-        .andReturn().getResponse().getContentAsString();
-    var game = objectMapper.readValue(responseJson, Game.class);
-
-    assertThat(game.getBoard().getCells()).containsAll(cells);
-  }
-
-  @Test
-  void postingGameWitCellsCreatesGameWithThoseCells2() throws Exception {
-    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-    var cellsJson = objectMapper.writeValueAsString(cells);
-    mockMvc.perform(post("/games").content(cellsJson))
-        .andExpect(jsonPath("$.board.cells[0].location.x", is(0)))
-        .andExpect(jsonPath("$.board.cells[0].location.y", is(0)))
-        .andExpect(jsonPath("$.board.cells[1].location.x", is(2)))
-        .andExpect(jsonPath("$.board.cells[1].location.y", is(2)));
-  }
-
-  @Test
   void gameCanBeRetrievedById() throws Exception {
     var id = "xyz";
-    when(gameRepository.findById(id)).thenReturn(new Game());
+    when(gameRepository.findById(id)).thenReturn(new Game(id));
     mockMvc.perform(get("/games/{id}", id))
-        .andExpect(jsonPath("$.id").exists());
+        .andExpect(jsonPath("$.id", is(id)));
   }
 
   @Test
@@ -104,5 +75,24 @@ class RestApiControllerTests {
         Game.class);
 
     assertThat(game1.getId()).isNotEqualTo(game2.getId());
+  }
+
+  @Test
+  void postingGameWithoutCellsYieldsGameWithoutCells() throws Exception {
+    mockMvc.perform(post("/games").content(emptySetJson))
+        .andDo(print())
+        .andExpect(jsonPath("$.id").exists())
+        .andExpect(jsonPath("$.board.cells").isEmpty());
+  }
+
+  @Test
+  void postingGameWitCellsCreatesGameWithThoseCells() throws Exception {
+    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
+    var cellsJson = objectMapper.writeValueAsString(cells);
+    mockMvc.perform(post("/games").content(cellsJson))
+        .andExpect(jsonPath("$.board.cells[0].location.x", is(0)))
+        .andExpect(jsonPath("$.board.cells[0].location.y", is(0)))
+        .andExpect(jsonPath("$.board.cells[1].location.x", is(2)))
+        .andExpect(jsonPath("$.board.cells[1].location.y", is(2)));
   }
 }
