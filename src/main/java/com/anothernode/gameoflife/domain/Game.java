@@ -7,7 +7,7 @@ public class Game {
 
   private String id = RandomStringUtils.randomAlphanumeric(10);
 
-  private Board board = new Board();
+  private Round round = new Round();
 
   public Game() {
   }
@@ -16,22 +16,22 @@ public class Game {
     this.id = id;
   }
 
-  public Game(Board board) {
-    this.board = board;
+  public Game(Round board) {
+    this.round = board;
   }
 
   /**
    * Creates a <i>Game</i> with a given start configuration expressed as as set of the {@link Cell}s
-   * on the {@link Board} in {@link Round} zero (before the first iteration).
+   * on the {@link Round} in {@link Round} zero (before the first iteration).
    *
    * @param cells the living {@link Cell}s before the first iteration
    */
   public Game(Set<Cell> cells) {
-    cells.forEach((cell -> board.add(cell)));
+    cells.forEach((cell -> round.add(cell)));
   }
 
-  public Board getBoard() {
-    return board;
+  public Round getRound() {
+    return round;
   }
 
   public String getId() {
@@ -39,13 +39,13 @@ public class Game {
   }
 
   public Set<Cell> cells() {
-    return board.getCells();
+    return round.getCells();
   }
 
   /**
    * TODO
    */
   public void iterate() {
-    board.getCells().clear();
+    round.getCells().clear();
   }
 }

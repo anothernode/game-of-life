@@ -61,7 +61,7 @@ class CellTests {
     @Test
     void countNeighborsCountsZeroForNoNeighbor() {
         var cell = new Cell(0, 0);
-        var board = new Board();
+        var board = new Round();
         board.add(cell);
 
         assertThat(cell.neighborCount()).isZero();
@@ -72,7 +72,7 @@ class CellTests {
     void countNeighborsCountsOneForOneNeighbor() {
         var cell = new Cell(0, 0);
         var neighbor = new Cell(0, 1);
-        var board = new Board();
+        var board = new Round();
         board.add(cell);
         board.add(neighbor);
 

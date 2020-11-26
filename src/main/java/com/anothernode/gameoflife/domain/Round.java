@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class Board {
+public class Round {
 
     private SortedSet<Cell> cells = new TreeSet<>();
 
@@ -12,7 +12,7 @@ public class Board {
         return cells;
     }
 
-    public int size() {
+    public int cellCount() {
         return cells.size();
     }
 

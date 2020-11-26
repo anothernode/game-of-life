@@ -3,9 +3,9 @@ package com.anothernode.gameoflife.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
-public class BoardTests {
+public class RoundTests {
 
-    private Board board = new Board();
+    private Round board = new Round();
 
     @Test
     public void cellsCanBeAddedToBoard() {
@@ -13,7 +13,7 @@ public class BoardTests {
         board.add(new Cell(-15, -33));
         board.add(new Cell(5, 18));
 
-        assertThat(board.size()).isEqualTo(2);
+        assertThat(board.cellCount()).isEqualTo(2);
     }
 
     @Test

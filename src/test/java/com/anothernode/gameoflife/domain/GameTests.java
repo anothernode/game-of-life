@@ -19,33 +19,33 @@ public class GameTests {
     @Test
     public void cellWithoutNeighborDies() {
 
-        Board board = new Board();
+        Round board = new Round();
         board.add(new Cell(0, 0));
         Game game = new Game(board);
 
         game.iterate();
 
-        assertThat(game.getBoard().size()).isEqualTo(0);
+        assertThat(game.getRound().cellCount()).isEqualTo(0);
     }
 
     @Test
     public void cellWithJustOneNeighborDies() {
 
-        Board board = new Board();
+        Round board = new Round();
         board.add(new Cell(0, 0));
         board.add(new Cell(1, 0));
         Game game = new Game(board);
 
         game.iterate();
 
-        assertThat(game.getBoard().size()).isEqualTo(0);
+        assertThat(game.getRound().cellCount()).isEqualTo(0);
     }
 
     @Disabled // TODO
     @Test
     public void cellWithTwoNeighborsSurvives() {
 
-        Board board = new Board();
+        Round board = new Round();
         board.add(new Cell(0, 0));
         board.add(new Cell(1, 0));
         board.add(new Cell(0, 1));
@@ -53,6 +53,6 @@ public class GameTests {
 
         game.iterate();
 
-        assertThat(game.getBoard().size()).isEqualTo(3);
+        assertThat(game.getRound().cellCount()).isEqualTo(3);
     }
 }
