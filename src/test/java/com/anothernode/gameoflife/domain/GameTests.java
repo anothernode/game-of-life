@@ -12,20 +12,20 @@ public class GameTests {
         Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
         Game game = new Game(cells);
 
-        assertThat(game.cells().size()).isEqualTo(2);
-        assertThat(game.cells()).contains(new Cell(0, 0), new Cell(2, 2));
+        assertThat(game.getCellsInFirstRound().size()).isEqualTo(2);
+        assertThat(game.getCellsInFirstRound()).contains(new Cell(0, 0), new Cell(2, 2));
     }
 
     @Test
     public void cellWithoutNeighborDies() {
 
-        Round board = new Round();
-        board.add(new Cell(0, 0));
-        Game game = new Game(board);
+        var round = new Round();
+        round.add(new Cell(0, 0));
+        var game = new Game(round);
 
         game.iterate();
 
-        assertThat(game.getRound().cellCount()).isEqualTo(0);
+        assertThat(game.getRound(1).cellCount()).isEqualTo(0);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class GameTests {
 
         game.iterate();
 
-        assertThat(game.getRound().cellCount()).isEqualTo(0);
+        assertThat(game.getRound(1).cellCount()).isEqualTo(0);
     }
 
     @Disabled // TODO
@@ -53,6 +53,6 @@ public class GameTests {
 
         game.iterate();
 
-        assertThat(game.getRound().cellCount()).isEqualTo(3);
+        assertThat(game.getRound(0).cellCount()).isEqualTo(3);
     }
 }

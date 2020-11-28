@@ -1,5 +1,7 @@
 package com.anothernode.gameoflife.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -7,17 +9,19 @@ public class Game {
 
   private String id = RandomStringUtils.randomAlphanumeric(10);
 
-  private Round round = new Round();
+  private List<Round> rounds = new ArrayList<>();
 
   public Game() {
+    this.rounds.add(new Round());
   }
 
   public Game(String id) {
     this.id = id;
+    this.rounds.add(new Round());
   }
 
-  public Game(Round board) {
-    this.round = board;
+  public Game(Round firstRound) {
+    this.rounds.add(firstRound);
   }
 
   /**
@@ -27,25 +31,27 @@ public class Game {
    * @param cells the living {@link Cell}s before the first iteration
    */
   public Game(Set<Cell> cells) {
-    cells.forEach((cell -> round.add(cell)));
+    this.rounds.add(new Round());
+    cells.forEach((cell -> this.rounds.get(0).add(cell)));
   }
 
-  public Round getRound() {
-    return round;
+  public List<Round> getRounds() {
+    return rounds;
+  }
+
+  public Round getRound(int i) {
+    return rounds.get(i);
   }
 
   public String getId() {
     return id;
   }
 
-  public Set<Cell> cells() {
-    return round.getCells();
+  public Set<Cell> getCellsInFirstRound() {
+    return rounds.get(0).getCells();
   }
 
-  /**
-   * TODO
-   */
   public void iterate() {
-    round.getCells().clear();
+    rounds.add(new Round());
   }
 }

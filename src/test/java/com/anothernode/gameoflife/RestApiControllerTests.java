@@ -82,7 +82,7 @@ class RestApiControllerTests {
   void postingGameWithoutCellsYieldsGameWithoutCells() throws Exception {
     mockMvc.perform(post("/games").content(emptySetJson))
         .andExpect(jsonPath("$.id").exists())
-        .andExpect(jsonPath("$.round.cells").isEmpty());
+        .andExpect(jsonPath("$.rounds[0].cells").isEmpty());
   }
 
   @Test
@@ -90,9 +90,9 @@ class RestApiControllerTests {
     var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     var cellsJson = objectMapper.writeValueAsString(cells);
     mockMvc.perform(post("/games").content(cellsJson))
-        .andExpect(jsonPath("$.round.cells[0].location.x", is(0)))
-        .andExpect(jsonPath("$.round.cells[0].location.y", is(0)))
-        .andExpect(jsonPath("$.round.cells[1].location.x", is(2)))
-        .andExpect(jsonPath("$.round.cells[1].location.y", is(2)));
+        .andExpect(jsonPath("$.rounds[0].cells[0].location.x", is(0)))
+        .andExpect(jsonPath("$.rounds[0].cells[0].location.y", is(0)))
+        .andExpect(jsonPath("$.rounds[0].cells[1].location.x", is(2)))
+        .andExpect(jsonPath("$.rounds[0].cells[1].location.y", is(2)));
   }
 }
