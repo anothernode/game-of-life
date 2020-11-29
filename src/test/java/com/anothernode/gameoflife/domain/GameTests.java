@@ -17,7 +17,7 @@ public class GameTests {
   }
 
   @Test
-  public void iteratingGameAddRoundToGame() {
+  public void iteratingAddsRoundToGame() {
     var game = new Game();
     game.iterate();
 
@@ -25,28 +25,39 @@ public class GameTests {
   }
 
   @Test
-  public void cellWithoutNeighborDies() {
-
-    var round = new Round();
-    round.add(new Cell(0, 0));
-    var game = new Game(round);
-
+  public void cellsWithFewerThanTwoNeighborsDie() {
+    var game = new Game(Set.of(new Cell(0, 0), new Cell(2, 0), new Cell(3, 0)));
     game.iterate();
 
-    assertThat(game.getRound(1).cellCount()).isEqualTo(0);
+    assertThat(game.getRound(1).cellCount()).isZero();
   }
 
   @Test
-  public void cellWithJustOneNeighborDies() {
-
-    var board = new Round();
-    board.add(new Cell(0, 0));
-    board.add(new Cell(1, 0));
-    var game = new Game(board);
-
+  public void cellsWithTwoNeighborsLiveOn() {
+    var game = new Game(Set.of(
+        new Cell(0, 0), new Cell(0, 1), new Cell(1, 0),
+        new Cell(0, 3), new Cell(1, 3), new Cell(2, 3)));
     game.iterate();
+    var nextRound = game.getRound(1);
 
-    assertThat(game.getRound(1).cellCount()).isEqualTo(0);
+    assertThat(nextRound.hasCell(0, 0)).isTrue();
+    assertThat(nextRound.hasCell(0, 1)).isTrue();
+    assertThat(nextRound.hasCell(1, 0)).isTrue();
+
+    assertThat(nextRound.hasCell(1, 3)).isTrue();
+  }
+
+  @Test
+  public void cellsWithThreeNeighborsLiveOn() {
+    var game = new Game(Set.of(
+        new Cell(0, 0), new Cell(0, 1), new Cell(0, 2), new Cell(1, 0),
+        new Cell(3, 0), new Cell(3, 1), new Cell(3, 2), new Cell(4, 1)));
+    game.iterate();
+    var nextRound = game.getRound(1);
+
+    assertThat(nextRound.hasCell(1, 0)).isTrue();
+    assertThat(nextRound.hasCell(3, 1)).isTrue();
+    assertThat(nextRound.hasCell(4, 1)).isTrue();
   }
 
   @Disabled // TODO

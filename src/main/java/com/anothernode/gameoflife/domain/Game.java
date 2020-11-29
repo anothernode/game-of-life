@@ -52,6 +52,14 @@ public class Game {
   }
 
   public void iterate() {
-    rounds.add(new Round());
+    var currentRound = rounds.get(rounds.size() - 1);
+    var nextRound = new Round();
+    for(var cell: currentRound.getCells()) {
+      var count = currentRound.countNeighbors(cell);
+      if(count == 2 || count == 3) {
+        nextRound.add(cell);
+      }
+    }
+    rounds.add(nextRound);
   }
 }
