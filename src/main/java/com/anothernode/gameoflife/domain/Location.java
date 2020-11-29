@@ -1,4 +1,4 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -9,6 +9,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 class WebApplicationTests {
 
     @Test
+    @SuppressWarnings("squid:S2699")
     void contextLoads() {
     }
 }

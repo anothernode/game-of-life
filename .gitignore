@@ -6,12 +6,13 @@ bin/
 !**/src/test/**
 src/main/generated
 
-### STS ###
+### Eclipse ###
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/*
+!.settings/org.eclipse.jdt.core.prefs
 .springBeans
 .sts4-cache
 

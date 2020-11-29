@@ -2,6 +2,7 @@ package com.anothernode.gameoflife;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.anothernode.gameoflife.domain.Game;
 import org.springframework.stereotype.Repository;
 
 @Repository

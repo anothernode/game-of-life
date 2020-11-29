@@ -1,8 +1,8 @@
-package com.anothernode.gameoflife;
+package com.anothernode.gameoflife.domain;
 
 import static java.text.MessageFormat.format;
 
-public class Cell {
+public class Cell implements Comparable<Cell> {
 
     private Location location;
 
@@ -21,6 +21,7 @@ public class Cell {
     }
 
     public int neighborCount() {
+        // TODO just a stub
         return 0;
     }
 
@@ -43,5 +44,15 @@ public class Cell {
         return format("Cell[x = {0}, y = {1}]",
                 getLocation().getX(),
                 getLocation().getY());
+    }
+
+    @Override
+    public int compareTo(Cell that) {
+        if (this.equals(that)) return 0;
+        if (this.location.getY() < that.location.getY()) return -1;
+        if (this.location.getY() > that.location.getY()) return 1;
+        if (this.location.getX() < that.location.getX()) return -1;
+        if (this.location.getX() > that.location.getX()) return 1;
+        return 0;
     }
 }
