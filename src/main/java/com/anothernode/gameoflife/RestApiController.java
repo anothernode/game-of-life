@@ -33,6 +33,8 @@ public class RestApiController {
 
   @PostMapping("/games/{id}/rounds")
   public Game nextRound(@PathVariable String id) {
-    return gameRepository.findById(id);
+    var game = gameRepository.findById(id);
+    game.iterate();
+    return game;
   }
 }

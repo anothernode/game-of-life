@@ -50,8 +50,8 @@ class RestApiTests {
   @Test
   void postingRoundToGameAddsRoundToThatGame() throws Exception {
     var newGame = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
-    var uri = String.format("%s/%s/rounds", gamesUri, newGame.getId());
-    var gameWithSecondRound = restTemplate.postForObject(uri, null, Game.class);
+    var roundsUri = String.format("%s/%s/rounds", gamesUri, newGame.getId());
+    var gameWithSecondRound = restTemplate.postForObject(roundsUri, null, Game.class);
 
     assertThat(newGame.getId()).isEqualTo(gameWithSecondRound.getId());
     assertThat(gameWithSecondRound.getRounds()).hasSize(2);
@@ -59,14 +59,10 @@ class RestApiTests {
 
   @Test
   void postingRoundToGameWithZeroCellsYieldsNextRoundWithZeroCellsOnBoard() throws Exception {
-    var game = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
-    var roundsUri = String.format("%s/%s/rounds", gamesUri, game.getId());
-    var resultEntity = restTemplate.postForEntity(roundsUri, null, Game.class);
+    var initialGame = restTemplate.postForObject(gamesUri, Set.of(), Game.class);
+    var roundsUri = String.format("%s/%s/rounds", gamesUri, initialGame.getId());
+    var gameWithSecondRound = restTemplate.postForObject(roundsUri, null, Game.class);
 
-    assertThat(resultEntity.getStatusCode().is2xxSuccessful())
-        .as("HTTP status code is 2xx")
-        .isTrue();
-
-    // TODO: incomplete assertions
+    assertThat(gameWithSecondRound.getRound(1).cellCount()).isZero();
   }
 }
