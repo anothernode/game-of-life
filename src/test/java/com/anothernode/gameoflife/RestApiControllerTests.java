@@ -86,7 +86,7 @@ class RestApiControllerTests {
   }
 
   @Test
-  void postingGameWitCellsCreatesGameWithThoseCells() throws Exception {
+  void postingGameWithCellsCreatesGameWithThoseCells() throws Exception {
     var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     var cellsJson = objectMapper.writeValueAsString(cells);
     mockMvc.perform(post("/games").content(cellsJson))
