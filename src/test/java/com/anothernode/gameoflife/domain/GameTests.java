@@ -7,52 +7,60 @@ import org.junit.jupiter.api.Test;
 
 public class GameTests {
 
-    @Test
-    public void gameWithStartConfigurationIsCreatedCorrectly() {
-        Set<Cell> cells = Set.of(new Cell(0, 0), new Cell(2, 2));
-        Game game = new Game(cells);
+  @Test
+  public void gameWithStartConfigurationIsCreatedCorrectly() {
+    var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
+    var game = new Game(cells);
 
-        assertThat(game.getCellsInFirstRound().size()).isEqualTo(2);
-        assertThat(game.getCellsInFirstRound()).contains(new Cell(0, 0), new Cell(2, 2));
-    }
+    assertThat(game.getCellsInFirstRound().size()).isEqualTo(2);
+    assertThat(game.getCellsInFirstRound()).contains(new Cell(0, 0), new Cell(2, 2));
+  }
 
-    @Test
-    public void cellWithoutNeighborDies() {
+  @Test
+  public void iteratingGameAddRoundToGame() {
+    var game = new Game();
+    game.iterate();
 
-        var round = new Round();
-        round.add(new Cell(0, 0));
-        var game = new Game(round);
+    assertThat(game.getRounds().size()).isEqualTo(2);
+  }
 
-        game.iterate();
+  @Test
+  public void cellWithoutNeighborDies() {
 
-        assertThat(game.getRound(1).cellCount()).isEqualTo(0);
-    }
+    var round = new Round();
+    round.add(new Cell(0, 0));
+    var game = new Game(round);
 
-    @Test
-    public void cellWithJustOneNeighborDies() {
+    game.iterate();
 
-        Round board = new Round();
-        board.add(new Cell(0, 0));
-        board.add(new Cell(1, 0));
-        Game game = new Game(board);
+    assertThat(game.getRound(1).cellCount()).isEqualTo(0);
+  }
 
-        game.iterate();
+  @Test
+  public void cellWithJustOneNeighborDies() {
 
-        assertThat(game.getRound(1).cellCount()).isEqualTo(0);
-    }
+    var board = new Round();
+    board.add(new Cell(0, 0));
+    board.add(new Cell(1, 0));
+    var game = new Game(board);
 
-    @Disabled // TODO
-    @Test
-    public void cellWithTwoNeighborsSurvives() {
+    game.iterate();
 
-        Round board = new Round();
-        board.add(new Cell(0, 0));
-        board.add(new Cell(1, 0));
-        board.add(new Cell(0, 1));
-        Game game = new Game(board);
+    assertThat(game.getRound(1).cellCount()).isEqualTo(0);
+  }
 
-        game.iterate();
+  @Disabled // TODO
+  @Test
+  public void cellWithTwoNeighborsSurvives() {
 
-        assertThat(game.getRound(0).cellCount()).isEqualTo(3);
-    }
+    var board = new Round();
+    board.add(new Cell(0, 0));
+    board.add(new Cell(1, 0));
+    board.add(new Cell(0, 1));
+    var game = new Game(board);
+
+    game.iterate();
+
+    assertThat(game.getRound(0).cellCount()).isEqualTo(3);
+  }
 }
