@@ -34,7 +34,8 @@ class GameTests {
   @Test
   void cellsWithTwoNeighborsLiveOn() {
     var game = new Game(Set.of(
-        new Cell(0, 0), new Cell(0, 1), new Cell(1, 0),
+        new Cell(0, 0), new Cell(1, 0),
+        new Cell(0, 1),
         new Cell(0, 3), new Cell(1, 3), new Cell(2, 3)));
     game.iterate();
     var nextRound = game.getRound(1);
@@ -49,13 +50,27 @@ class GameTests {
   @Test
   void cellsWithThreeNeighborsLiveOn() {
     var game = new Game(Set.of(
-        new Cell(0, 0), new Cell(0, 1), new Cell(0, 2), new Cell(1, 0),
-        new Cell(3, 0), new Cell(3, 1), new Cell(3, 2), new Cell(4, 1)));
+        new Cell(0, 0), new Cell(1, 0), new Cell(3, 0),
+        new Cell(0, 1), new Cell(3, 1), new Cell(4, 1),
+        new Cell(0, 2), new Cell(3, 2)));
     game.iterate();
     var nextRound = game.getRound(1);
 
     assertThat(nextRound.hasCell(1, 0)).isTrue();
     assertThat(nextRound.hasCell(3, 1)).isTrue();
     assertThat(nextRound.hasCell(4, 1)).isTrue();
+  }
+
+  @Test
+  void cellsWithMoreThanThreeNeighborsDie() {
+    var game = new Game(Set.of(
+        new Cell(0, 0), new Cell(1, 0),
+        new Cell(0, 1), new Cell(1, 1),
+        new Cell(0, 2)));
+    game.iterate();
+    var nextRound = game.getRound(1);
+
+    assertThat(nextRound.hasCell(0, 1)).isFalse();
+    assertThat(nextRound.hasCell(1, 1)).isFalse();
   }
 }
