@@ -73,4 +73,15 @@ class GameTests {
     assertThat(nextRound.hasCell(0, 1)).isFalse();
     assertThat(nextRound.hasCell(1, 1)).isFalse();
   }
+
+  @Test
+  void cellsAreBornOnEmptySquaresWithExactlyThreeNeighboringCells() {
+    var game = new Game(Set.of(
+      new Cell(-3, -3), new Cell(-2, -3), new Cell(-1, -3),
+      new Cell(-3, -2),
+      new Cell(-4, 1), new Cell(1, 1),
+      new Cell(-4, 2), new Cell(1, 2),
+      new Cell(1, 3)
+    ));
+  }
 }
