@@ -5,10 +5,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class GameTests {
+class GameTests {
 
   @Test
-  public void gameWithStartConfigurationIsCreatedCorrectly() {
+  void gameWithStartConfigurationIsCreatedCorrectly() {
     var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     var game = new Game(cells);
 
@@ -17,7 +17,7 @@ public class GameTests {
   }
 
   @Test
-  public void iteratingAddsRoundToGame() {
+  void iteratingAddsRoundToGame() {
     var game = new Game();
     game.iterate();
 
@@ -25,7 +25,7 @@ public class GameTests {
   }
 
   @Test
-  public void cellsWithFewerThanTwoNeighborsDie() {
+  void cellsWithFewerThanTwoNeighborsDie() {
     var game = new Game(Set.of(new Cell(0, 0), new Cell(2, 0), new Cell(3, 0)));
     game.iterate();
 
@@ -33,7 +33,7 @@ public class GameTests {
   }
 
   @Test
-  public void cellsWithTwoNeighborsLiveOn() {
+  void cellsWithTwoNeighborsLiveOn() {
     var game = new Game(Set.of(
         new Cell(0, 0), new Cell(0, 1), new Cell(1, 0),
         new Cell(0, 3), new Cell(1, 3), new Cell(2, 3)));
@@ -48,7 +48,7 @@ public class GameTests {
   }
 
   @Test
-  public void cellsWithThreeNeighborsLiveOn() {
+  void cellsWithThreeNeighborsLiveOn() {
     var game = new Game(Set.of(
         new Cell(0, 0), new Cell(0, 1), new Cell(0, 2), new Cell(1, 0),
         new Cell(3, 0), new Cell(3, 1), new Cell(3, 2), new Cell(4, 1)));
@@ -62,7 +62,7 @@ public class GameTests {
 
   @Disabled // TODO
   @Test
-  public void cellWithTwoNeighborsSurvives() {
+  void cellWithTwoNeighborsSurvives() {
 
     var board = new Round();
     board.add(new Cell(0, 0));
