@@ -2,7 +2,6 @@ package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Set;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class GameTests {
@@ -58,20 +57,5 @@ class GameTests {
     assertThat(nextRound.hasCell(1, 0)).isTrue();
     assertThat(nextRound.hasCell(3, 1)).isTrue();
     assertThat(nextRound.hasCell(4, 1)).isTrue();
-  }
-
-  @Disabled // TODO
-  @Test
-  void cellWithTwoNeighborsSurvives() {
-
-    var board = new Round();
-    board.add(new Cell(0, 0));
-    board.add(new Cell(1, 0));
-    board.add(new Cell(0, 1));
-    var game = new Game(board);
-
-    game.iterate();
-
-    assertThat(game.getRound(0).cellCount()).isEqualTo(3);
   }
 }
