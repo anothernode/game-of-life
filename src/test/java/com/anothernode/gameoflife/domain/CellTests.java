@@ -57,25 +57,4 @@ class CellTests {
 
         assertThat(cell).hasToString("Cell[x = 8, y = 3]");
     }
-
-    @Test
-    void countNeighborsCountsZeroForNoNeighbor() {
-        var cell = new Cell(0, 0);
-        var board = new Round();
-        board.add(cell);
-
-        assertThat(cell.neighborCount()).isZero();
-    }
-
-    @Disabled("Todo")
-    @Test
-    void countNeighborsCountsOneForOneNeighbor() {
-        var cell = new Cell(0, 0);
-        var neighbor = new Cell(0, 1);
-        var board = new Round();
-        board.add(cell);
-        board.add(neighbor);
-
-        assertThat(cell.neighborCount()).isEqualTo(1);
-    }
 }

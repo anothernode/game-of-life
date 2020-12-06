@@ -20,11 +20,6 @@ public class Cell implements Comparable<Cell> {
         return location;
     }
 
-    public int neighborCount() {
-        // TODO just a stub
-        return 0;
-    }
-
     @Override
     public boolean equals(Object that) {
         if (!(that instanceof Cell)) {
