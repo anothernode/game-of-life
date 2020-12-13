@@ -5,84 +5,76 @@ import org.junit.jupiter.api.Test;
 
 public class RoundTests {
 
-    private Round board = new Round();
+  private Round round = new Round();
 
-    @Test
-    public void cellsCanBeAddedToBoard() {
+  @Test
+  void cellsCanBeAddedToBoard() {
+    round.add(new Cell(-15, -33));
+    round.add(new Cell(5, 18));
 
-        board.add(new Cell(-15, -33));
-        board.add(new Cell(5, 18));
+    assertThat(round.cellCount()).isEqualTo(2);
+  }
 
-        assertThat(board.cellCount()).isEqualTo(2);
-    }
+  @Test
+  void hasCellCanDetermineCellNonExistence() {
+    int x = 5;
+    int y = -33;
 
-    @Test
-    public void hasCellCanDetermineCellNonExistence() {
+    assertThat(round.hasCell(Location.create(x, y))).isFalse();
+    assertThat(round.hasCell(x, y)).isFalse();
+  }
 
-        int x = 5;
-        int y = -33;
+  @Test
+  void hasCellCanDetermineCellExistence() {
+    int x = -135;
+    int y = 15;
+    round.add(new Cell(x, y));
 
-        assertThat(board.hasCell(Location.create(x, y))).isFalse();
-        assertThat(board.hasCell(x, y)).isFalse();
-    }
+    assertThat(round.hasCell(Location.create(x, y))).isTrue();
+    assertThat(round.hasCell(x, y)).isTrue();
+  }
 
-    @Test
-    public void hasCellCanDetermineCellExistence() {
+  @Test
+  void countNeighborsCountsCorrectForCellWithoutNeighbor() {
+    var baseCell = new Cell(0, 0);
+    round.add(baseCell);
 
-        int x = -135;
-        int y = 15;
+    assertThat(round.countNeighbors(baseCell)).isEqualTo(0);
+  }
 
-        board.add(new Cell(x, y));
+  @Test
+  void countNeighborsCountsCorrectForCellWithOneNeighbor() {
+    var baseCell = new Cell(0, 0);
+    round.add(baseCell);
+    round.add(new Cell(0, 1));
 
-        assertThat(board.hasCell(Location.create(x, y))).isTrue();
-        assertThat(board.hasCell(x, y)).isTrue();
-    }
+    assertThat(round.countNeighbors(baseCell)).isEqualTo(1);
+  }
 
-    @Test
-    public void countNeighborsCountsCorrectForCellWithoutNeighbor() {
+  @Test
+  void countNeighborsCountsCorrectWithThreeNeighbors() {
+    var baseCell = new Cell(47, 23);
+    round.add(baseCell);
+    round.add(new Cell(46, 22));
+    round.add(new Cell(47, 24));
+    round.add(new Cell(48, 24));
 
-        Cell baseCell = new Cell(0, 0);
-        board.add(baseCell);
+    assertThat(round.countNeighbors(baseCell)).isEqualTo(3);
+  }
 
-        assertThat(board.countNeighbors(baseCell)).isEqualTo(0);
-    }
+  @Test
+  void countNeighborsCountsCorrectWithEightNeighbors() {
+    var baseCell = new Cell(538, 5);
+    round.add(baseCell);
+    round.add(new Cell(537, 4));
+    round.add(new Cell(537, 5));
+    round.add(new Cell(537, 6));
+    round.add(new Cell(538, 4));
+    round.add(new Cell(538, 6));
+    round.add(new Cell(539, 4));
+    round.add(new Cell(539, 5));
+    round.add(new Cell(539, 6));
 
-    @Test
-    public void countNeighborsCountsCorrectForCellWithOneNeighbor() {
-
-        Cell baseCell = new Cell(0, 0);
-        board.add(baseCell);
-        board.add(new Cell(0, 1));
-
-        assertThat(board.countNeighbors(baseCell)).isEqualTo(1);
-    }
-
-    @Test
-    public void countNeighborsCountsCorrectWithThreeNeighbors() {
-
-        Cell baseCell = new Cell(47, 23);
-        board.add(baseCell);
-        board.add(new Cell(46, 22));
-        board.add(new Cell(47, 24));
-        board.add(new Cell(48, 24));
-
-        assertThat(board.countNeighbors(baseCell)).isEqualTo(3);
-    }
-
-    @Test
-    public void countNeighborsCountsCorrectWithEightNeighbors() {
-
-        Cell baseCell = new Cell(538, 5);
-        board.add(baseCell);
-        board.add(new Cell(537, 4));
-        board.add(new Cell(537, 5));
-        board.add(new Cell(537, 6));
-        board.add(new Cell(538, 4));
-        board.add(new Cell(538, 6));
-        board.add(new Cell(539, 4));
-        board.add(new Cell(539, 5));
-        board.add(new Cell(539, 6));
-
-        assertThat(board.countNeighbors(baseCell)).isEqualTo(8);
-    }
+    assertThat(round.countNeighbors(baseCell)).isEqualTo(8);
+  }
 }
