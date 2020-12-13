@@ -4,20 +4,20 @@ import static java.text.MessageFormat.format;
 
 public class Cell implements Comparable<Cell> {
 
-    private Location location;
+    private Square square;
 
     public Cell() {}
 
-    public Cell(Location location) {
-        this.location = location;
+    public Cell(Square square) {
+        this.square = square;
     }
 
     public Cell(int x, int y) {
-        this.location = Location.create(x, y);
+        this.square = Square.create(x, y);
     }
 
-    public Location getLocation() {
-        return location;
+    public Square getSquare() {
+        return square;
     }
 
     @Override
@@ -25,29 +25,29 @@ public class Cell implements Comparable<Cell> {
         if (!(that instanceof Cell)) {
             return false;
         } else {
-            return this.location.equals(((Cell) that).getLocation());
+            return this.square.equals(((Cell) that).getSquare());
         }
     }
 
     @Override
     public int hashCode() {
-        return this.getLocation().hashCode();
+        return this.getSquare().hashCode();
     }
 
     @Override
     public String toString() {
         return format("Cell[x = {0}, y = {1}]",
-                getLocation().getX(),
-                getLocation().getY());
+                getSquare().getX(),
+                getSquare().getY());
     }
 
     @Override
     public int compareTo(Cell that) {
         if (this.equals(that)) return 0;
-        if (this.location.getY() < that.location.getY()) return -1;
-        if (this.location.getY() > that.location.getY()) return 1;
-        if (this.location.getX() < that.location.getX()) return -1;
-        if (this.location.getX() > that.location.getX()) return 1;
+        if (this.square.getY() < that.square.getY()) return -1;
+        if (this.square.getY() > that.square.getY()) return 1;
+        if (this.square.getX() < that.square.getX()) return -1;
+        if (this.square.getX() > that.square.getX()) return 1;
         return 0;
     }
 }

@@ -20,7 +20,7 @@ public class RoundTests {
     int x = 5;
     int y = -33;
 
-    assertThat(round.hasCell(Location.create(x, y))).isFalse();
+    assertThat(round.hasCell(Square.create(x, y))).isFalse();
     assertThat(round.hasCell(x, y)).isFalse();
   }
 
@@ -30,7 +30,7 @@ public class RoundTests {
     int y = 15;
     round.add(new Cell(x, y));
 
-    assertThat(round.hasCell(Location.create(x, y))).isTrue();
+    assertThat(round.hasCell(Square.create(x, y))).isTrue();
     assertThat(round.hasCell(x, y)).isTrue();
   }
 

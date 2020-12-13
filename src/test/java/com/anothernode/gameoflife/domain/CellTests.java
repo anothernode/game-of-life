@@ -2,7 +2,6 @@ package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class CellTests {
@@ -12,11 +11,11 @@ class CellTests {
         var x = -12;
         var y = -37;
 
-        var location = Location.create(x, y);
-        var cell = new Cell(location);
+        var square = Square.create(x, y);
+        var cell = new Cell(square);
 
-        assertThat(cell.getLocation().getX()).isEqualTo(x);
-        assertThat(cell.getLocation().getY()).isEqualTo(y);
+        assertThat(cell.getSquare().getX()).isEqualTo(x);
+        assertThat(cell.getSquare().getY()).isEqualTo(y);
     }
 
     @Test

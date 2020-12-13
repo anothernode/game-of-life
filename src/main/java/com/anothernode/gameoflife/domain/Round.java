@@ -1,5 +1,6 @@
 package com.anothernode.gameoflife.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -24,18 +25,18 @@ public class Round {
     this.cells.addAll(cells);
   }
 
-  public boolean hasCell(Location location) {
+  public boolean hasCell(Square location) {
     return cells.contains(new Cell(location));
   }
 
   public boolean hasCell(int x, int y) {
-    return hasCell(Location.create(x, y));
+    return hasCell(Square.create(x, y));
   }
 
   public int countNeighbors(Cell cell) {
     var count = 0;
-    var baseCellX = cell.getLocation().getX();
-    var baseCellY = cell.getLocation().getY();
+    var baseCellX = cell.getSquare().getX();
+    var baseCellY = cell.getSquare().getY();
 
     for (int x = baseCellX - 1; x <= baseCellX + 1; x++) {
       for (int y = baseCellY - 1; y <= baseCellY + 1; y++) {
@@ -47,8 +48,8 @@ public class Round {
     return count - 1;
   }
 
-  public SortedSet<Cell> calculateSurvivingCells() {
-    var survivingCells = new TreeSet<Cell>();
+  public Set<Cell> calculateSurvivingCells() {
+    var survivingCells = new HashSet<Cell>();
     for (var cell : cells) {
       var count = countNeighbors(cell);
       if (count == 2 || count == 3) {
@@ -58,14 +59,14 @@ public class Round {
     return survivingCells;
   }
 
-  public SortedSet<Cell> calculateNewbornCells() {
-    // this method should actually on the round
-
+  public Set<Cell> calculateNewbornCells() {
     // create a list of all empty squares neighboring cells
     // for each of those squares, count the neighboring living cells
     // if that count is equal to three:
     //   add a cell on that square in the next round
 
-    return new TreeSet<Cell>();
+    var newbornCells = new HashSet<Cell>();
+
+    return newbornCells;
   }
 }

@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class Location {
+public abstract class Square {
 
     @JsonCreator
-    public static Location create(@JsonProperty("x") int x, @JsonProperty("y") int y) {
-        return new AutoValue_Location(x, y);
+    public static Square create(@JsonProperty("x") int x, @JsonProperty("y") int y) {
+        return new AutoValue_Square(x, y);
     }
 
     public abstract int getX();
