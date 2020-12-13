@@ -2,6 +2,7 @@ package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Set;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class GameTests {
@@ -75,6 +76,7 @@ class GameTests {
   }
 
   @Test
+  @Disabled
   void cellsAreBornOnEmptySquaresWithExactlyThreeNeighboringCells() {
     var game = new Game(Set.of(
       new Cell(-3, -3), new Cell(-2, -3), new Cell(-1, -3),
@@ -83,5 +85,12 @@ class GameTests {
       new Cell(-4, 2), new Cell(1, 2),
       new Cell(1, 3)
     ));
+    game.iterate();
+    var nextRound = game.getRound(1);
+
+    assertThat(nextRound.hasCell(-2, -4)).isTrue();
+    assertThat(nextRound.hasCell(0, 1)).isTrue();
+    assertThat(nextRound.hasCell(2, 2)).isTrue();
+    assertThat(nextRound.hasCell(0, 3)).isTrue();
   }
 }
