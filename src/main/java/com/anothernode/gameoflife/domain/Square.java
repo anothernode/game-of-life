@@ -27,10 +27,12 @@ public abstract class Square implements Comparable<Square> {
   @JsonIgnore
   public SortedSet<Square> getNeighborSquares() {
     var result = new TreeSet<Square>();
+    var x = this.getX();
+    var y = this.getY();
     result.addAll(Set.of(
-      Square.create(2, -3), Square.create(3, -3), Square.create(4, -3),
-      Square.create(2, -2), Square.create(4, -2),
-      Square.create(2, -1), Square.create(3, -1), Square.create(4, -1)));
+      Square.create(x - 1, y - 1), Square.create(x, y - 1), Square.create(x + 1, y - 1),
+      Square.create(x - 1, y), Square.create(x + 1, y),
+      Square.create(x - 1, y + 1), Square.create(x, y + 1), Square.create(x + 1, y + 1)));
     return result;
   }
 
