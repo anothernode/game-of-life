@@ -44,17 +44,6 @@ public class Cell implements Comparable<Cell> {
 
   @Override
   public int compareTo(Cell that) {
-    if (this.equals(that))
-      return 0;
-    // I guess this belongs to the Square (Tell, don't ask)
-    if (this.square.getY() < that.square.getY())
-      return -1;
-    if (this.square.getY() > that.square.getY())
-      return 1;
-    if (this.square.getX() < that.square.getX())
-      return -1;
-    if (this.square.getX() > that.square.getX())
-      return 1;
-    return 0;
+    return this.getSquare().compareTo(that.getSquare());
   }
 }

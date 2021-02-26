@@ -1,13 +1,11 @@
 package com.anothernode.gameoflife.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class SquareTests {
 
   @Test
-  @Disabled
   void squareCanReturnItsNeighborSquares() {
     var square = Square.create(3, -2);
     var neighborSquares = square.getNeighborSquares();

@@ -2,9 +2,11 @@ package com.anothernode.gameoflife.domain;
 
 import static java.util.Comparator.comparingInt;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
@@ -22,10 +24,14 @@ public abstract class Square implements Comparable<Square> {
     return new AutoValue_Square(x, y);
   }
 
-  public Set<Square> getNeighborSquares() {
-    var neighborSquares = new HashSet<Square>();
-
-    return neighborSquares;
+  @JsonIgnore
+  public SortedSet<Square> getNeighborSquares() {
+    var result = new TreeSet<Square>();
+    result.addAll(Set.of(
+      Square.create(2, -3), Square.create(3, -3), Square.create(4, -3),
+      Square.create(2, -2), Square.create(4, -2),
+      Square.create(2, -1), Square.create(3, -1), Square.create(4, -1)));
+    return result;
   }
 
   @Override
