@@ -40,12 +40,13 @@ public class Round {
 
     for (int x = baseCellX - 1; x <= baseCellX + 1; x++) {
       for (int y = baseCellY - 1; y <= baseCellY + 1; y++) {
-        if (this.hasCell(x, y)) {
+        // The base cell should never get counted
+        if (this.hasCell(x, y) && !cell.equals(new Cell(x, y))) {
           count++;
         }
       }
     }
-    return count - 1;
+    return count;
   }
 
   public Set<Cell> calculateSurvivingCells() {
@@ -60,13 +61,19 @@ public class Round {
   }
 
   public Set<Cell> calculateNewbornCells() {
-    // create a list of all empty squares neighboring cells
-    // for each of those squares, count the neighboring living cells
-    // if that count is equal to three:
-    //   add a cell on that square in the next round
-
+    var squaresNeighboringCells = new HashSet<Square>();
+    for (Cell cell : this.cells) {
+      squaresNeighboringCells.addAll(cell.getSquare().getNeighborSquares());
+    }
     var newbornCells = new HashSet<Cell>();
-
+    for (Square square : squaresNeighboringCells) {
+      if (!hasCell(square)) {
+        var cell = new Cell(square);
+        if (countNeighbors(cell) == 3) {
+          newbornCells.add(cell);
+        }
+      }
+    }
     return newbornCells;
   }
 }

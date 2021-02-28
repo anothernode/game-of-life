@@ -25,6 +25,7 @@ class GameTests {
   }
 
   @Test
+  // TODO: move to RoundTest
   void cellsWithFewerThanTwoNeighborsDie() {
     var game = new Game(Set.of(new Cell(0, 0), new Cell(2, 0), new Cell(3, 0)));
     game.iterate();
@@ -33,6 +34,7 @@ class GameTests {
   }
 
   @Test
+  // TODO: move to RoundTest
   void cellsWithTwoNeighborsLiveOn() {
     var game = new Game(Set.of(
         new Cell(0, 0), new Cell(1, 0),
@@ -41,14 +43,12 @@ class GameTests {
     game.iterate();
     var nextRound = game.getRound(1);
 
-    assertThat(nextRound.hasCell(0, 0)).isTrue();
-    assertThat(nextRound.hasCell(0, 1)).isTrue();
-    assertThat(nextRound.hasCell(1, 0)).isTrue();
-
-    assertThat(nextRound.hasCell(1, 3)).isTrue();
+    assertThat(nextRound.getCells()).contains(
+        new Cell(0, 0), new Cell(0, 1), new Cell(1, 0), new Cell(1, 3));
   }
 
   @Test
+  // TODO: move to RoundTest
   void cellsWithThreeNeighborsLiveOn() {
     var game = new Game(Set.of(
         new Cell(0, 0), new Cell(1, 0), new Cell(3, 0),
@@ -63,6 +63,7 @@ class GameTests {
   }
 
   @Test
+  // TODO: move to RoundTest
   void cellsWithMoreThanThreeNeighborsDie() {
     var game = new Game(Set.of(
         new Cell(0, 0), new Cell(1, 0),
@@ -76,21 +77,18 @@ class GameTests {
   }
 
   @Test
-  @Disabled
+  // TODO: move to RoundTests
   void cellsAreBornOnEmptySquaresWithExactlyThreeNeighboringCells() {
     var game = new Game(Set.of(
-      new Cell(-3, -3), new Cell(-2, -3), new Cell(-1, -3),
-      new Cell(-3, -2),
-      new Cell(-4, 1), new Cell(1, 1),
-      new Cell(-4, 2), new Cell(1, 2),
-      new Cell(1, 3)
-    ));
+        new Cell(-3, -3), new Cell(-2, -3), new Cell(-1, -3),
+        new Cell(-3, -2),
+        new Cell(-4, 1), new Cell(1, 1),
+        new Cell(-4, 2), new Cell(0, 2), new Cell(1, 2),
+        new Cell(1, 3)));
     game.iterate();
     var nextRound = game.getRound(1);
 
-    assertThat(nextRound.hasCell(-2, -4)).isTrue();
-    assertThat(nextRound.hasCell(0, 1)).isTrue();
-    assertThat(nextRound.hasCell(2, 2)).isTrue();
-    assertThat(nextRound.hasCell(0, 3)).isTrue();
+    assertThat(nextRound.getCells()).contains(
+        new Cell(-2, -4), new Cell(0, 1), new Cell(2, 2), new Cell(0, 3));
   }
 }
