@@ -8,7 +8,7 @@ public class LocationTests {
     @Test
     public void locationExists() {
 
-        Location location = Location.create(-5, 14);
+        Square location = Square.create(-5, 14);
 
         assertThat(location.getX()).isEqualTo(-5);
         assertThat(location.getY()).isEqualTo(14);

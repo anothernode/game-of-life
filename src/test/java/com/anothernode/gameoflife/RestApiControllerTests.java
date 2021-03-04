@@ -90,9 +90,9 @@ class RestApiControllerTests {
     var cells = Set.of(new Cell(0, 0), new Cell(2, 2));
     var cellsJson = objectMapper.writeValueAsString(cells);
     mockMvc.perform(post("/games").content(cellsJson))
-        .andExpect(jsonPath("$.rounds[0].cells[0].location.x", is(0)))
-        .andExpect(jsonPath("$.rounds[0].cells[0].location.y", is(0)))
-        .andExpect(jsonPath("$.rounds[0].cells[1].location.x", is(2)))
-        .andExpect(jsonPath("$.rounds[0].cells[1].location.y", is(2)));
+        .andExpect(jsonPath("$.rounds[0].cells[0].square.x", is(0)))
+        .andExpect(jsonPath("$.rounds[0].cells[0].square.y", is(0)))
+        .andExpect(jsonPath("$.rounds[0].cells[1].square.x", is(2)))
+        .andExpect(jsonPath("$.rounds[0].cells[1].square.y", is(2)));
   }
 }

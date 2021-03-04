@@ -52,6 +52,11 @@ public class Game {
   }
 
   public void iterate() {
-    rounds.add(new Round());
+    var currentRound = rounds.get(rounds.size() - 1);
+    var nextRound = new Round();
+    nextRound.add(currentRound.calculateSurvivingCells());
+    nextRound.add(currentRound.calculateNewbornCells());
+    rounds.add(nextRound);
   }
+
 }

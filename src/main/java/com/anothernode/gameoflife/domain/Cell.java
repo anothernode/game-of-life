@@ -4,55 +4,46 @@ import static java.text.MessageFormat.format;
 
 public class Cell implements Comparable<Cell> {
 
-    private Location location;
+  private Square square;
 
-    public Cell() {}
+  public Cell() {
+  }
 
-    public Cell(Location location) {
-        this.location = location;
+  public Cell(Square square) {
+    this.square = square;
+  }
+
+  public Cell(int x, int y) {
+    this.square = Square.create(x, y);
+  }
+
+  public Square getSquare() {
+    return square;
+  }
+
+  @Override
+  public boolean equals(Object that) {
+    if (!(that instanceof Cell)) {
+      return false;
+    } else {
+      return this.square.equals(((Cell) that).getSquare());
     }
+  }
 
-    public Cell(int x, int y) {
-        this.location = Location.create(x, y);
-    }
+  @Override
+  public int hashCode() {
+    return this.getSquare().hashCode();
+  }
 
-    public Location getLocation() {
-        return location;
-    }
+  @Override
+  public String toString() {
+    return format("Cell[x = {0}, y = {1}]",
+        getSquare().getX(),
+        getSquare().getY());
+  }
 
-    public int neighborCount() {
-        // TODO just a stub
-        return 0;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (!(that instanceof Cell)) {
-            return false;
-        } else {
-            return this.location.equals(((Cell) that).getLocation());
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return this.getLocation().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return format("Cell[x = {0}, y = {1}]",
-                getLocation().getX(),
-                getLocation().getY());
-    }
-
-    @Override
-    public int compareTo(Cell that) {
-        if (this.equals(that)) return 0;
-        if (this.location.getY() < that.location.getY()) return -1;
-        if (this.location.getY() > that.location.getY()) return 1;
-        if (this.location.getX() < that.location.getX()) return -1;
-        if (this.location.getX() > that.location.getX()) return 1;
-        return 0;
-    }
+  @Override
+  public int compareTo(Cell that) {
+    return this.getSquare().compareTo(that.getSquare());
+  }
 }
